@@ -26,6 +26,14 @@ docker로 실행후 `http://localhost:8880` 접속하여 확인
 .env.development.local 개발용
 ```
 `./run.sh dev`로 자동 생성되지만, 내용은 따로 적어주셔야합니다.
+하지만 아직까지 비밀스러운 내용은 없어서 여기에 적어드릴게요..ㅋㅋㅋ
+```
+<.env.local>
+MONGO_DATABASE="mychar_db"
+<.env.production.local>
+MONGO_HOST=mongo
+MONGO_PORT=27017
+```
 
 
 - 현재까지 개발된 API
