@@ -1,0 +1,24 @@
+[
+    {
+        "unique_id": 1,
+        "name": "열혈캐",
+        "description": "당신은 열혈입니다.",
+        "image": "https://camo.githubusercontent.com/58045a79a69afea4cab1cea6def6d911fba3956cf5fd683addf41c032aa64088/68747470733a2f2f636c6475702e636f6d2f78465646784f696f41552e737667",
+        "good": 3,
+        "bad": 2
+    },
+    {
+        "unique_id": 2,
+        "name": "아방캐",
+        "description": "당신은 아방입니다.",
+        "image": "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci8wMTM0OWQ4NzdiNmU0YjljMGRkYmFkZjk3ZjA3ZmEwZD9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.scMTD0tAq_vba6jfqXJ2VNNJ70g8wjj3xyiUNeOIYG4",
+        "good": 1
+    },
+    {
+        "unique_id": 3,
+        "name": "또라이캐",
+        "description": "당신은 또라이 입니다.",
+        "image": "https://camo.githubusercontent.com/bded053078908a1f0565e5c8786f033f40bbcbddd3812f3f712a94a590b3d862/68747470733a2f2f6f70656e636f6c6c6563746976652e636f6d2f6d6f6368616a732f74696572732f6261636b6572732e7376673f6c696d69743d333026627574746f6e3d66616c7365266176617461724865696768743d34362677696474683d373530",
+        "bad": 0
+    }
+]
