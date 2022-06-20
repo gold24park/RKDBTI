@@ -18,9 +18,11 @@
     "paths": {
       "@pages/*": ["src/pages/*"],
       "@components/*": ["src/components/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@services/*": ["src/services/*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "test/**/*.ts"],
   "exclude": ["node_modules"]
 }

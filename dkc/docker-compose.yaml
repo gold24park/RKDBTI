@@ -1,3 +1,32 @@
 version: '3.4'
 
-# TODO: app / nginx / mongodb
+services:
+  app:
+    restart: unless-stopped
+    build: ../
+    working_dir: /app
+    volumes:
+      - ../logs:/app/logs
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+  
+  nginx:
+    depends_on:
+      - app
+    restart: unless-stopped
+    image: nginx:1.19-alpine
+    volumes: 
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8880:80
+  
+  mongo:
+    image: mongo:4.4.13
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo/data:/data
+      - ./mongo/data/configdb:/data/configdb
+      - ./mongo/data/db:/data/db

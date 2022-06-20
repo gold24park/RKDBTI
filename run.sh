@@ -1,4 +1,9 @@
 #!/bin/sh
+
+[ ! -f .env.local ] && touch .env.local
+[ ! -f .env.development.local ] && touch .env.development.local
+[ ! -f .env.production.local ] && touch .env.production.local
+
 _dev() {
     NODE_ENV=development yarn dev
 }

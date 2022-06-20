@@ -1,2 +1,11 @@
 FROM node:16-alpine
-# TODO
+
+RUN apk add --no-cache apache2-utils
+
+WORKDIR /app
+
+COPY . .
+
+RUN yarn install
+
+ENTRYPOINT [ "/app/entrypoint.sh" ]
