@@ -1,9 +1,13 @@
 import { getDatabase, DatabaseRequest } from "@middlewares/database";
 import { getSession } from "@middlewares/session";
 import { Character } from "@services/mongodb/models";
+import getRedis from "@services/redis";
 import { Filter, FindOptions } from "mongodb";
 import { NextApiResponse } from "next";
 import nc from "next-connect";
+
+
+let redis = getRedis()
 
 const handler = nc();
 
@@ -54,7 +58,7 @@ handler
         percentage = (target / sum) * 100;
       }
 
-      await updateStatistics(req, column);
+      await updateStatistics(req, typeNumber);
 
       res.status(200).json({
         ...character,
@@ -70,13 +74,21 @@ handler
     }
   });
 
-async function updateStatistics(req: DatabaseRequest, typeColumn: string) {
-  // TODO: redis에서 session uuid 별로 체크해서 increment하기
-  await req.db.statistics?.updateOne(
-    {},
-    { $inc: { [typeColumn]: 1 } },
-    { upsert: true }
-  );
+async function updateStatistics(req: DatabaseRequest, typeNumber: number) {
+  let column = `type${typeNumber}`;
+  if (req.session != null) {
+    let cached: number[] = JSON.parse((await redis.get(req.session)) || "[]")
+    if (!cached.includes(typeNumber)) {
+      await req.db.statistics?.updateOne(
+        {},
+        { $inc: { [column]: 1 } },
+        { upsert: true }
+      );
+      cached.push(typeNumber)
+      // ttl = 10분
+      await redis.set(req.session, JSON.stringify(cached), 'EX', 60 * 10)
+    }
+  } 
 }
 
 export default handler;
