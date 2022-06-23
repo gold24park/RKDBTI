@@ -10,7 +10,10 @@ let redis = getRedis()
 
 const handler = nc();
 
-// 가장 높은 점수를 받은 항목의 데이터를 가져옵니다.
+/**
+ * 가장 높은 점수를 받은 항목의 데이터를 가져옵니다.
+ * @query typeNumber (number)
+ */
 handler.use(getSession).use(getDatabase).get<DatabaseRequest, NextApiResponse>(async (req, res) => {    
     let typeNumber = parseInt(req.query.typeNumber as string, 0)
     

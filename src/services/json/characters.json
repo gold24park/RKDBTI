@@ -1,7 +1,7 @@
 [
     {
         "unique_id": 1,
-        "name": "열혈캐",
+        "name": "정의로운 적발 열혈 캐",
         "description": "당신은 열혈입니다.",
         "image": "https://camo.githubusercontent.com/58045a79a69afea4cab1cea6def6d911fba3956cf5fd683addf41c032aa64088/68747470733a2f2f636c6475702e636f6d2f78465646784f696f41552e737667",
         "good": 3,
@@ -9,16 +9,86 @@
     },
     {
         "unique_id": 2,
-        "name": "아방캐",
-        "description": "당신은 아방입니다.",
+        "name": "갈발 방관캐",
+        "description": "불의를 보면 피하며 내 몸의 안전을 제일 우선시하는 갈발 방관캐. 언제 죽을지 모르는 험난한 2D 세상에서 당신은 장수할 것입니다. 살아남은자가 승자. 짙은 브라운",
         "image": "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci8wMTM0OWQ4NzdiNmU0YjljMGRkYmFkZjk3ZjA3ZmEwZD9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.scMTD0tAq_vba6jfqXJ2VNNJ70g8wjj3xyiUNeOIYG4",
         "good": 1
     },
     {
         "unique_id": 3,
-        "name": "또라이캐",
-        "description": "당신은 또라이 입니다.",
+        "name": "또라이 캐",
+        "description": "앞뒤안가리고 내가 하고싶은대로 하는 또라이 캐 흑발+흰색 브릿지 ",
         "image": "https://camo.githubusercontent.com/bded053078908a1f0565e5c8786f033f40bbcbddd3812f3f712a94a590b3d862/68747470733a2f2f6f70656e636f6c6c6563746976652e636f6d2f6d6f6368616a732f74696572732f6261636b6572732e7376673f6c696d69743d333026627574746f6e3d66616c7365266176617461724865696768743d34362677696474683d373530",
         "bad": 0
+    },
+    {
+        "unique_id": 4,
+        "name": "쿨한데 흑발 남캐",
+        "description": "쿨한데 은근 사람을 챙겨서 설레게 만드는 흑발 남캐. 발렌타인데이 같은 날 쏟아지는 무수한 고백편지"
+    },
+    {
+        "unique_id": 5,
+        "name": "조용히 갈발캐",
+        "description": "말수는 그렇게 많지 않지만 조용히 사람을 편안하게 만들어 주는 갈발캐"
+    },
+    {
+        "unique_id": 6,
+        "name": "착한 캐",
+        "description": "눈물도 많고 못하는 것도 많지만 사람은 착한 캐. 당신이 항상 울고 있는 이유는 다른사람의 감정을 누구보다 잘 이해해서가 아닐까요? 금발"
+    },
+    {
+        "unique_id": 7,
+        "name": "냉철한 팩폭캐",
+        "description": "보통 집단의 우두머리를 맡고 있는 초엘리트 흑발캐"
+    },
+    {
+        "unique_id": 8,
+        "name": "잘 챙겨주는 캐",
+        "description": "남들을 잘 챙겨주는 캐. 이 친구가 없으면 집단이 굴러가질 않는다. 모두의 사랑을 받고 있다. 핑크"
+    },
+    {
+        "unique_id": 9,
+        "name": "능력이 좋아서 인정 받는 캐",
+        "description": "재수없고 싸가지 없지만 능력이 좋아서 인정 받는 캐 흑+보라"
+    },
+    {
+        "unique_id": 10,
+        "name": "흑막인 캐",
+        "description": "평소에는 착하고 평범한데 사실 흑막인 캐 금발"
+    },
+    {
+        "unique_id": 11,
+        "name": " 장난꾸러기 실눈 캐",
+        "description": "선인지 악인지 알수 없는 능글거리는 장난꾸러기 실눈 캐 금발"
+    },
+    {
+        "unique_id": 12,
+        "name": "아방한 매력이 귀여운 캐",
+        "description": "왠지 도와주고 싶어져! 가만히 내버려 둘수 없는 귀여운 매력으로 사람들의 호감을 산다. 이제 제발 옆자리 흑발친구가 당신을 좋아하고 있다는걸 깨달아주라고요! (바보) 코토리베이지"
+    },
+    {
+        "unique_id": 13,
+        "name": "초록머리 안경캐",
+        "description": "보수적이고 열심히 노력하는 성실한 초록머리 안경캐. 좋아하는 사람앞에서는 자신도 모르게 풀어져버리고 말아"
+    },
+    {
+        "unique_id": 14,
+        "name": "자신의 일을 하는 파란머리 캐",
+        "description": "썩 존재감이 있진 않지만 묵묵히 자신의 일을 하는 파란머리 캐. 위기의 순간에 아주 결정적인 역할을 한다. "
+    },
+    {
+        "unique_id":15,
+        "name": "사실 (천재)인 캐",
+        "description": "세상만사 다 귀찮고 의욕이 없는데 사실 (천재)인 캐 은발"
+    },
+    {
+        "unique_id": 16,
+        "name": "허당 캐",
+        "description": "겉으로는 쿨해보이려고 부단히 노력하나 허당 캐. 사실 모두들 이 친구가 잘되기를 지켜보고 있다. 모두에게 사랑받고 있을지도? 주황 "
+    },
+    {
+        "unique_id": 17,
+        "name": "긍정 100% 캐",
+        "description": "언제나 해피~ 긍정 100% 캐. 금발"
     }
 ]
