@@ -32,7 +32,9 @@ docker로 실행후 `http://localhost:8880` 접속하여 확인
 MONGO_DATABASE="mychar_db"
 <.env.production.local>
 MONGO_HOST=mongo
-MONGO_PORT=27017
+MONGO_PORT=27017 
+
+REDIS_URI=redis://redis:6379
 ```
 
 
