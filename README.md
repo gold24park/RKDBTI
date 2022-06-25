@@ -1,6 +1,6 @@
 ## Getting Started
 
-#### 도커로 실행하기:
+#### 도커로 실행하기
 
 ```
 cd dkc
@@ -11,7 +11,7 @@ sample/mongo를 dkc/mongo에 복사하여 테스트 데이터가 들어간 채�
 
 docker로 실행후 `http://localhost:8880` 접속하여 확인
 
-#### 환경변수:
+#### 환경변수
 
 ```
 .env.local 공용 환경변수
