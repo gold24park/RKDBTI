@@ -1,4 +1,5 @@
-import { Character } from "@services/mongodb/models";
+import { Character } from "./Chracter";
+
 
 export interface MyCharacterResult {
     unique_id: number;

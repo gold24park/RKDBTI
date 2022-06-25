@@ -1,7 +1,8 @@
-import connectToDatabase from "@services/mongodb/connect";
 import * as mongo from "mongodb";
 import { NextApiRequest } from "next";
 import { AppApiRequest } from "./session";
+
+const MONGO_URI = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`
 
 interface Database {
     client?: mongo.MongoClient;
@@ -33,7 +34,11 @@ async function createIndexes() {
 export async function getDatabase(req: DatabaseRequest, res: any, next: any) {
     try {
         if (db.client == null) {
-            db.client = await connectToDatabase()
+            console.log(`Start connecting to mongodb...${MONGO_URI}`)
+            const client: mongo.MongoClient = new mongo.MongoClient(MONGO_URI, {
+                connectTimeoutMS: 5000
+            })
+            db.client = await client.connect()
     
             const database: mongo.Db = db.client.db(process.env.MONGO_DATABASE)
             db.characters = database.collection("characters")

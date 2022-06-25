@@ -1,6 +1,6 @@
 import { getDatabase, DatabaseRequest } from "@middlewares/database";
 import { getSession } from "@middlewares/session";
-import { Character } from "@services/mongodb/models";
+import { Character } from "@services/models/Chracter";
 import getRedis from "@services/redis";
 import { Filter, FindOptions } from "mongodb";
 import { NextApiResponse } from "next";
@@ -75,7 +75,7 @@ async function updateStatistics(req: DatabaseRequest, typeNumber: number) {
         { upsert: true }
       );
       cached.push(typeNumber)
-      // ttl = 10분
+      // redis ttl = 10분
       await redis.set(req.session, JSON.stringify(cached), 'EX', 60 * 10)
     }
   } 
