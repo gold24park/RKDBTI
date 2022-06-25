@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+/**
+ * 선택지 공통 스타일링
+ */
 export const AnswerButton = styled.button<{
     fontColor?: string
 }>`

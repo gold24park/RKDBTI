@@ -12,10 +12,11 @@ const handler = nc();
 
 /**
  * 가장 높은 점수를 받은 항목의 데이터를 가져옵니다.
- * @query typeNumber (number)
+ * @method POST
+ * @body typeNumber (number)
  */
-handler.use(getSession).use(getDatabase).get<DatabaseRequest, NextApiResponse>(async (req, res) => {    
-    let typeNumber = parseInt(req.query.typeNumber as string, 0)
+handler.use(getSession).use(getDatabase).post<DatabaseRequest, NextApiResponse>(async (req, res) => {    
+    let typeNumber = parseInt(JSON.parse(req.body).typeNumber as string, 0)
     
     let character: Character | null | undefined = await req.db.characters?.findOne({
         unique_id: typeNumber as number

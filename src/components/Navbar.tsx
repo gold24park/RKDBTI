@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+/**
+ * 네비바
+ */
 export const Navbar = () => (
     <nav>
         네비바 자리
