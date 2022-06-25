@@ -1,6 +1,6 @@
 ## Getting Started
 
-- 도커로 실행하기:
+#### 도커로 실행하기:
 
 ```
 cd dkc
@@ -11,7 +11,7 @@ sample/mongo를 dkc/mongo에 복사하여 테스트 데이터가 들어간 채�
 
 docker로 실행후 `http://localhost:8880` 접속하여 확인
 
-- 환경변수:
+#### 환경변수:
 
 ```
 .env.local 공용 환경변수
@@ -21,14 +21,21 @@ docker로 실행후 `http://localhost:8880` 접속하여 확인
 
 sample/.env.local에 예시 환경변수 설정을 적어두었습니다.
 
-- 현재까지 개발된 API
+#### Pages
+
+- /: 홈
+- /test: 테스트 수행 페이지
+- /result: 결과 페이지
+
+#### API endpoints
 
 ```
-/api/result?typeNumber=<number>
-가장 높은 점수를 받은 유형을 받아서 통계에 추가하고, 관련 정보를 내려줍니다.
-(아직 세션별로 increment 제한은 개발안했음)
-예시 데이터는 sample/api.result 확인
+[POST] /api/result?typeNumber=<number>
 ```
+
+가장 높은 점수를 받은 유형을 받아서 통계에 추가하고, 관련 정보를 내려줍니다.
+새로고침을 통해 무분별하게 통계가 집계되는 사태를 방지하기 위해 같은 세션기준 유형별로 10분 안에는 집계되지 않습니다.
+(예시 데이터는 sample/api.result 확인)
 
 ## 계획
 
