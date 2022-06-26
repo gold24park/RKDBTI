@@ -31,7 +31,7 @@ const TestPage: NextPage = () => {
       // 마지막 답변을 했으므로 결과화면으로 이동합니다.
       let typeNumber = scores.indexOf(Math.max(...scores));
       router.push({
-        pathname: "/result",
+        pathname: "/result_dev",
         query: {
           type: ResultConverter.encode(typeNumber),
         },
