@@ -1,68 +1,72 @@
 import { KakaoButton } from "@components/KakaoButton"
 import { Layout } from "@components/Layout"
 import { TwitterButton } from "@components/TwitterButton"
-import { MyCharacterResult } from "@services/models/MyCharacterResult"
+import { Character } from "@services/models/Chracter"
 import { ResultConverter } from "@services/ResultConverter"
-import { NextPage } from "next"
+import { Filter, FindOptions } from "mongodb"
+import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import nc from "next-connect";
+import { getDatabase } from "@middlewares/database"
 
-const ResultPage: NextPage = () => {
-    const router = useRouter()
+export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
+    const middleware = nc().use(getDatabase)
+    await middleware.run(req, res)
+    
+    const { type } = query
 
-    const [result, setResult] = useState<MyCharacterResult | null>()
-    const [isLoading, setLoading] = useState(false)
+    var result = null
 
-    useEffect(() => {
-        if (router && router.query) {
-            const type = router.query.type || ""
-            let typeNumber = ResultConverter.decode(type as string)
-            if (process.env.NODE_ENV == "development" && !typeNumber) {
-                // 개발 테스트의 용이성을 위해 typeNumber로 바로 확인할 수 있게 한다.
-                typeNumber = router.query.typeNumber as string
-            }
-            requestResult(typeNumber)
+    let typeNumber = parseInt(ResultConverter.decode(type as string), 0)
+    console.log(type)
+
+    let character: Character | null | undefined = await req.db.characters?.findOne({
+        unique_id: typeNumber as number
+    } as Filter<Character>, 
+    {projection: {_id: 0}} as FindOptions)
+
+    if (character) {
+        let relatedUniqueIds: number[] = [character?.good || 0, character.bad || 0]
+
+        let [ relatedCharacters, statistics ] = await Promise.all([
+            req.db.characters?.aggregate([
+                {$match: {unique_id: {$in: relatedUniqueIds}}},
+                {$project: {unique_id: 1, name: 1, image: 1, _id: 0}}
+            ]).toArray(),
+            req.db.statistics?.findOne({}, {projection: {_id: 0}} as FindOptions)
+        ])
+
+        // 잘 맞는 캐릭터와 아닌 캐릭터
+        let good = relatedCharacters?.find(c => character?.good == c.unique_id) || null
+        let bad = relatedCharacters?.find(c => character?.bad == c.unique_id) || null
+
+        // 통계적으로 몇 %?
+        let column = `type${typeNumber}`
+        let percentage: number = 100
+
+        if (statistics) {
+            let target = (statistics[column] || 0) + 1 // 자기자신
+            let sum = Object.values(statistics).reduce((p, c) => p + c)
+            percentage = target / sum * 100
         }
-    }, [router])
-
-    const requestResult = (typeNumber: any) => {
-        if (!typeNumber || isLoading) {
-            return
-        }
-        setLoading(true)
         
-        fetch(`api/result?typeNumber=${typeNumber}`, {
-            method: "POST",
-            body: JSON.stringify({
-                typeNumber: typeNumber
-            })
-        })
-        .then((res) => {
-            if (!res.ok) {
-                throw new Error(res.statusText)
-            }
-            return res.json()
-        })
-        .then((result: MyCharacterResult) => {
-            setLoading(false)
-            setResult(result)
-        })
-        .catch((err) => {
-            setLoading(false)
-            setResult(null)
-        })
+        result = { 
+            ...character,
+            good,
+            bad,
+            percentage
+        };
     }
 
-    if (isLoading) {
-        // TODO: 두구두구~ 애니메이션이 나왔으면!
-        return (
-            <Layout>
-                <h1>결과를 불러오는 중...</h1>
-            </Layout>
-        )
-    }
+    const url = req.headers["referer"] || null
 
+    return {
+        props: { result, url }
+    }
+}
+
+
+const ResultPage: NextPage = ({ result, url }) => {
     if (result == null) {
         return (
             <Layout>
@@ -77,7 +81,7 @@ const ResultPage: NextPage = () => {
     return (
         <Layout>
             <Head>
-                <meta property="og:url" content={location.href}/>
+                <meta property="og:url" content={url}/>
                 <meta property="og:title" content={`내가 애니캐가 된다면 | ${result.name}`}/>
                 <meta property="og:image" content={result.image}/>
                 <meta property="og:description" content={result.description}/>

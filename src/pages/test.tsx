@@ -5,6 +5,7 @@ import questions from "@services/json/questions.json";
 import { AnswerButton } from "@components/AnswerButton";
 import { useRouter } from "next/router";
 import { ResultConverter } from "@services/ResultConverter";
+import { debounce } from "lodash";
 
 enum Direction {
   NEXT = 1,
@@ -20,18 +21,28 @@ const TestPage: NextPage = () => {
   );
   const [questionIndex, setQuestionIndex] = useState<number>(0);
 
+  const updateStatistics = async (typeNumber: number) => {
+    await fetch(`/api/statistics`, {
+      method: "POST",
+      body: JSON.stringify({
+        typeNumber: typeNumber,
+      }),
+    });
+  };
+
   // 현재 질문 상태를 앞, 뒤로 넘깁니다.
   const updateQuestion = (typeScores: number[], direction: Direction) => {
     setScores(scores.map((v, i) => v + typeScores[i] * direction));
     setQuestionIndex(questionIndex + direction);
   };
 
-  const handleClickAnswer = (answer: number, typeScores: number[]) => {
+  const handleClickAnswer = async (answer: number, typeScores: number[]) => {
     if (questionIndex == questions.length - 1) {
       // 마지막 답변을 했으므로 결과화면으로 이동합니다.
       let typeNumber = scores.indexOf(Math.max(...scores));
+      await updateStatistics(typeNumber);
       router.push({
-        pathname: "/result_dev",
+        pathname: "/result",
         query: {
           type: ResultConverter.encode(typeNumber),
         },
@@ -69,17 +80,14 @@ const TestPage: NextPage = () => {
       <br />
 
       {questions[questionIndex].a.map(({ answer, type }, answerIndex) => (
-        <>
-          <AnswerButton
-            key={`answer_${answerIndex}`}
-            onClick={() => {
-              handleClickAnswer(answerIndex, type);
-            }}
-          >
-            {answer}
-          </AnswerButton>
-          <br />
-        </>
+        <AnswerButton
+          key={`answer_${answerIndex}`}
+          onClick={debounce(async () => {
+            await handleClickAnswer(answerIndex, type);
+          }, 50)}
+        >
+          {answer}
+        </AnswerButton>
       ))}
 
       <code>
