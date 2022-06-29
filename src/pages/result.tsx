@@ -7,20 +7,28 @@ import { Filter, FindOptions } from "mongodb"
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
 import nc from "next-connect";
-import { getDatabase } from "@middlewares/database"
+import { DatabaseRequest, getDatabase } from "@middlewares/database"
+import { MyCharacterResult } from "@services/models/MyCharacterResult"
+
+type Props = {
+    result: MyCharacterResult | null,
+    url: string | null
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
     const middleware = nc().use(getDatabase)
+
     await middleware.run(req, res)
     
     const { type } = query
 
+    const db = (req as DatabaseRequest).db
+
     var result = null
 
     let typeNumber = parseInt(ResultConverter.decode(type as string), 0)
-    console.log(type)
 
-    let character: Character | null | undefined = await req.db.characters?.findOne({
+    let character: Character | null | undefined = await db.characters?.findOne({
         unique_id: typeNumber as number
     } as Filter<Character>, 
     {projection: {_id: 0}} as FindOptions)
@@ -29,11 +37,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
         let relatedUniqueIds: number[] = [character?.good || 0, character.bad || 0]
 
         let [ relatedCharacters, statistics ] = await Promise.all([
-            req.db.characters?.aggregate([
+            db.characters?.aggregate([
                 {$match: {unique_id: {$in: relatedUniqueIds}}},
                 {$project: {unique_id: 1, name: 1, image: 1, _id: 0}}
             ]).toArray(),
-            req.db.statistics?.findOne({}, {projection: {_id: 0}} as FindOptions)
+            db.statistics?.findOne({}, {projection: {_id: 0}} as FindOptions)
         ])
 
         // 잘 맞는 캐릭터와 아닌 캐릭터
@@ -66,7 +74,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
 }
 
 
-const ResultPage: NextPage = ({ result, url }) => {
+function ResultPage({ result, url }: Props) {
     if (result == null) {
         return (
             <Layout>
@@ -77,23 +85,23 @@ const ResultPage: NextPage = ({ result, url }) => {
 
     const kakaoShareTitle = "내가 애니캐가 된다면"
     const twitterShareTitle = `내가 애니캐가 된다면\n${result.name}일지도?`
-    
+
     return (
         <Layout>
             <Head>
-                <meta property="og:url" content={url}/>
-                <meta property="og:title" content={`내가 애니캐가 된다면 | ${result.name}`}/>
-                <meta property="og:image" content={result.image}/>
-                <meta property="og:description" content={result.description}/>
+                <meta property="og:url" content={url || ""} />
+                <meta property="og:title" content={`내가 애니캐가 된다면 | ${result.name}`} />
+                <meta property="og:image" content={result.image} />
+                <meta property="og:description" content={result.description} />
             </Head>
             <h1>당신의 타입은 {result.unique_id}</h1>
             <code>
                 {JSON.stringify(result)}
             </code>
-            <br/>
-            <TwitterButton shareTitle={twitterShareTitle} result={result}/>
-            <br/>
-            <KakaoButton shareTitle={kakaoShareTitle} result={result}/>
+            <br />
+            <TwitterButton shareTitle={twitterShareTitle} result={result} />
+            <br />
+            <KakaoButton shareTitle={kakaoShareTitle} result={result} />
         </Layout>
     )
 }
