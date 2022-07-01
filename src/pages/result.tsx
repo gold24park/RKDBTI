@@ -4,11 +4,14 @@ import { TwitterButton } from "@components/TwitterButton"
 import { Character } from "@services/models/Chracter"
 import { ResultConverter } from "@services/ResultConverter"
 import { Filter, FindOptions } from "mongodb"
-import { GetServerSideProps, NextPage } from "next"
+import { GetServerSideProps } from "next"
 import Head from "next/head"
-import nc from "next-connect";
+import nc from "next-connect"
+import useSWR from 'swr'
+import { fetcher } from "@services/fetcher"
 import { DatabaseRequest, getDatabase } from "@middlewares/database"
 import { MyCharacterResult } from "@services/models/MyCharacterResult"
+import { StatisticsResult } from "@services/models/StatisticsResult"
 
 type Props = {
     result: MyCharacterResult | null,
@@ -36,33 +39,19 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
     if (character) {
         let relatedUniqueIds: number[] = [character?.good || 0, character.bad || 0]
 
-        let [ relatedCharacters, statistics ] = await Promise.all([
-            db.characters?.aggregate([
-                {$match: {unique_id: {$in: relatedUniqueIds}}},
-                {$project: {unique_id: 1, name: 1, image: 1, _id: 0}}
-            ]).toArray(),
-            db.statistics?.findOne({}, {projection: {_id: 0}} as FindOptions)
-        ])
+        let relatedCharacters = await db.characters?.aggregate([
+            {$match: {unique_id: {$in: relatedUniqueIds}}},
+            {$project: {unique_id: 1, name: 1, image: 1, _id: 0}}
+        ]).toArray()
 
         // 잘 맞는 캐릭터와 아닌 캐릭터
         let good = relatedCharacters?.find(c => character?.good == c.unique_id) || null
         let bad = relatedCharacters?.find(c => character?.bad == c.unique_id) || null
 
-        // 통계적으로 몇 %?
-        let column = `type${typeNumber}`
-        let percentage: number = 100
-
-        if (statistics) {
-            let target = (statistics[column] || 0) + 1 // 자기자신
-            let sum = Object.values(statistics).reduce((p, c) => p + c)
-            percentage = target / sum * 100
-        }
-        
         result = { 
             ...character,
             good,
-            bad,
-            percentage
+            bad
         };
     }
 
@@ -75,6 +64,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
 
 
 function ResultPage({ result, url }: Props) {
+    const { data, error } = useSWR<StatisticsResult>(`/api/statistics?typeNumber=${result?.unique_id}`, fetcher)
+
     if (result == null) {
         return (
             <Layout>
@@ -98,6 +89,11 @@ function ResultPage({ result, url }: Props) {
             <code>
                 {JSON.stringify(result)}
             </code>
+            {
+                data && (
+                    <code>{JSON.stringify(data)}</code>
+                )
+            }
             <br />
             <TwitterButton shareTitle={twitterShareTitle} result={result} />
             <br />

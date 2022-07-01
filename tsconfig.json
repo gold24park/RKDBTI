@@ -23,6 +23,6 @@
       "@services/*": ["src/services/*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "test/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "test/**/*.ts", "src/services/fetcher.js"],
   "exclude": ["node_modules"]
 }

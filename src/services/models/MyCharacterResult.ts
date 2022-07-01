@@ -6,7 +6,6 @@ export interface MyCharacterResult {
     name: string;
     image: string;
     description: string;
-    percentage: number;
     good?: Character;
     bad?: Character;
 }

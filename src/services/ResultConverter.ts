@@ -6,7 +6,7 @@ import { Base64 } from 'js-base64'
  */
 export namespace ResultConverter {
     export const decode = (encodedResult: string) => {
-        let decoded = Base64.decode(encodedResult)
+        let decoded = Base64.decode(encodedResult || "0")
         return decoded.replace('typeNumber', '')
     }
 
