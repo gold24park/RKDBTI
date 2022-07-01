@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+    /* 만화영어 폰트는 'Limelight' */
     /* 조선 굴림체 */
     @font-face {
         font-family: 'ChosunGu';
@@ -27,13 +28,32 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'ChosunGu', sans-serif;
         line-height: 1.4;
         height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     body {
+        position: absolute;
         margin: auto !important;
         max-width: 500px;
         width: 100%;
         height: 100%;
+        max-height: 1080px;
         overflow: hidden;
-        position: relative;
+        display: flex;
+    }
+    #wrapper {
+        position: absolute;
+        padding: 20px;
+        border: 1px solid black;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        box-shadow: 10px 10px 0px black;
+    }
+    * {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
     }
 `;

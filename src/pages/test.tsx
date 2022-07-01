@@ -6,6 +6,7 @@ import { AnswerButton } from "@components/AnswerButton";
 import { useRouter } from "next/router";
 import { ResultConverter } from "@services/ResultConverter";
 import { debounce } from "lodash";
+import { Navbar } from "@components/Navbar";
 
 enum Direction {
   NEXT = 1,
@@ -71,6 +72,7 @@ const TestPage: NextPage = () => {
 
   return (
     <Layout>
+      <Navbar/>
       <h1>
         {questionIndex + 1}. {questions[questionIndex].q}
       </h1>

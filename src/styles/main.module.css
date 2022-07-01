@@ -1,0 +1,84 @@
+.mainTitle {
+    font-family: 'ChosunKm', serif;
+    font-size: 60px;
+    position: relative;
+    top: 20px;
+    left: 10px;
+}
+.startBtn {
+    position: absolute;
+    bottom: calc(60px + 60px + 14px);
+    width: calc(100% - 40px) !important;
+}
+.shareBtn {
+    position: absolute;
+    bottom: 60px;
+    width: calc(100% - 40px) !important;
+}
+.copyRight {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    font-size: 14px;
+    transform: translateX(-50%);
+    color: #8c8f92;
+}
+.railComics {
+    font-family: 'Limelight', monospace;
+    font-size: 48px;
+    color: #2A7ED3;
+    transform: rotate(90deg);
+    position: absolute;
+    white-space: nowrap;
+    top: 170px;
+    right: -105px;
+}
+.railComicsOne {
+    font-family: 'Limelight', monospace;
+    font-size: 138px;
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+}
+.railSimteBadge {
+    background: black;
+    color: white;
+    border-radius: 30px;
+    display: inline;
+    padding: 6px 14px;
+    position: absolute;
+    top: 24px;
+    display: flex;
+}
+.railSimteBadge img {
+    margin-right: 4px !important;
+}
+.skewed1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: powderblue;
+    padding: 200px 0;
+    -webkit-transform: skew(0deg, -10deg);
+    -moz-transform: skew(0deg, -10deg);
+    -ms-transform: skew(0deg, -10deg);
+    -o-transform: skew(0deg, -10deg);
+    transform: skew(0deg, -10deg);
+    margin-top: -200px;
+}
+
+.skewed2 {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.15);
+    padding: 200px 0;
+    -webkit-transform: skew(0deg, -22deg);
+    -moz-transform: skew(0deg, -22deg);
+    -ms-transform: skew(0deg, -22deg);
+    -o-transform: skew(0deg, -22deg);
+    transform: skew(0deg, -22deg);
+    margin-top: -200px;
+}

@@ -12,6 +12,7 @@ import { fetcher } from "@services/fetcher"
 import { DatabaseRequest, getDatabase } from "@middlewares/database"
 import { MyCharacterResult } from "@services/models/MyCharacterResult"
 import { StatisticsResult } from "@services/models/StatisticsResult"
+import { Navbar } from "@components/Navbar"
 
 type Props = {
     result: MyCharacterResult | null,
@@ -79,6 +80,7 @@ function ResultPage({ result, url }: Props) {
 
     return (
         <Layout>
+            <Navbar/>
             <Head>
                 <meta property="og:url" content={url || ""} />
                 <meta property="og:title" content={`내가 애니캐가 된다면 | ${result.name}`} />
