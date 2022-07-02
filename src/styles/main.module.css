@@ -1,9 +1,11 @@
 .mainTitle {
     font-family: 'ChosunKm', serif;
-    font-size: 60px;
+    font-size: 66px;
     position: relative;
     top: 20px;
     left: 10px;
+    color: black;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 .startBtn {
     position: absolute;
@@ -25,13 +27,15 @@
 }
 .railComics {
     font-family: 'Limelight', monospace;
-    font-size: 48px;
-    color: #2A7ED3;
+    font-size: 68px;
+    color: white;
+    text-shadow: -2px -2px 0 #000, 2px -1px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
     transform: rotate(90deg);
     position: absolute;
     white-space: nowrap;
-    top: 170px;
-    right: -105px;
+    top: 150px;
+    opacity: 0.9;
+    right: -165px;
 }
 .railComicsOne {
     font-family: 'Limelight', monospace;
@@ -49,6 +53,7 @@
     position: absolute;
     top: 24px;
     display: flex;
+    cursor: pointer;
 }
 .railSimteBadge img {
     margin-right: 4px !important;
@@ -58,7 +63,14 @@
     top: 0;
     left: 0;
     right: 0;
-    background: powderblue;
+    /* background: repeating-linear-gradient(45deg, #ddd, #444 2px); */
+    background: repeating-linear-gradient(
+        55deg,
+        #888,
+        #888 3px,
+        #555 3px,
+        #555 5px
+    );
     padding: 200px 0;
     -webkit-transform: skew(0deg, -10deg);
     -moz-transform: skew(0deg, -10deg);
@@ -81,4 +93,36 @@
     -o-transform: skew(0deg, -22deg);
     transform: skew(0deg, -22deg);
     margin-top: -200px;
+}
+
+
+.skewed3 {
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    right: 0;
+    background: radial-gradient(#999 1px, transparent 1px);
+    background-size : 8px 8px;
+    padding: 900px 0;
+    -webkit-transform: skew(0deg, 10deg);
+    -moz-transform: skew(0deg, 10deg);
+    -ms-transform: skew(0deg, 10deg);
+    -o-transform: skew(0deg, 10deg);
+    transform: skew(0deg, 10deg);
+    margin-top: -200px;
+}
+
+/* Mobile */
+@media (max-width:480px)  { 
+    .mainTitle {
+        font-size: 48px;
+    }
+    .railComics {
+        font-size: 48px;
+        top: 110px;
+        right: -115px;
+    }
+    .railComicsOne {
+        font-size: 108px;
+    }
 }

@@ -1,8 +1,14 @@
 import { ResultConverter } from '@services/ResultConverter'
-import { Props, SnsButton } from './SnsButton'
+import { logEvent } from 'firebase/analytics'
+import { Props, SnsButton } from './Buttons'
 
 export const TwitterButton = ({shareTitle, result}: Props) => {
     const handleOnClick = () => {
+        logEvent(window.FirebaseAnalytics, "share_twitter", {
+            url: location.href,
+            typeNumber: result.unique_id
+        })
+
         const baseUrl = `https://${location.host}`
         const resultUrl = `${baseUrl}/result?type=${ResultConverter.encode(result.unique_id)}`
 

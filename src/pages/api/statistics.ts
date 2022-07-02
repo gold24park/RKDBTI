@@ -20,44 +20,55 @@ const handler = nc();
  */
 handler.use(getSession).use(getDatabase)
 .get<DatabaseRequest, NextApiResponse>(async (req, res) => {
-  let typeNumber = parseInt(req.query.typeNumber as string)
-  let column = `type${typeNumber}`;
+  try {
+    let typeNumber = parseInt(req.query.typeNumber as string)
+    let column = `type${typeNumber}`;
 
-  let statistics = await req.db.statistics?.findOne({}, {projection: {_id: 0}} as FindOptions)
+    let statistics = await req.db.statistics?.findOne({}, {projection: {_id: 0}} as FindOptions)
 
-  // 통계적으로 몇 %?
-  let percentage: number = 100
-  let targetCount: number = 0
-  let totalCount: number = 0
+    // 통계적으로 몇 %?
+    let percentage: number = 100
+    let targetCount: number = 0
+    let totalCount: number = 0
 
-  if (statistics) {
-      targetCount = (statistics[column] || 0) + 1 // 자기자신
-      totalCount = Object.values(statistics).reduce((p, c) => p + c)
-      percentage = targetCount / totalCount * 100
+    if (statistics) {
+        targetCount = (statistics[column] || 0) + 1 // 자기자신
+        totalCount = Object.values(statistics).reduce((p, c) => p + c)
+        percentage = targetCount / totalCount * 100
+    }
+    return res.status(200).json({
+      percentage,
+      targetCount,
+      totalCount
+    })
+  } catch (e) {
+    console.error(e)
+    return res.status(500).json({})
   }
-  return res.status(200).json({
-    percentage,
-    targetCount,
-    totalCount
-  })
 })
 .post<DatabaseRequest, NextApiResponse>(async (req, res) => {
-    let typeNumber = parseInt(JSON.parse(req.body).typeNumber as string, 0)
-    let column = `type${typeNumber}`;
-    if (req.session != null) {
-      let cached: number[] = JSON.parse((await redis.get(req.session)) || "[]")
-      if (!cached.includes(typeNumber)) {
-        await req.db.statistics?.updateOne(
-          {},
-          { $inc: { [column]: 1 } },
-          { upsert: true }
-        );
-        cached.push(typeNumber)
-        // redis ttl = 10분
-        await redis.set(req.session, JSON.stringify(cached), 'EX', 60 * 10)
-      }
-    } 
-    return res.status(200).json({})
+    try {
+      let typeNumber = parseInt(JSON.parse(req.body).typeNumber as string, 0)
+      let column = `type${typeNumber}`;
+      if (req.session != null) {
+        let cached: number[] = JSON.parse((await redis.get(req.session)) || "[]")
+        if (!cached.includes(typeNumber)) {
+          await req.db.statistics?.updateOne(
+            {},
+            { $inc: { [column]: 1 } },
+            { upsert: true }
+          );
+          cached.push(typeNumber)
+          // redis ttl = 10분
+          await redis.set(req.session, JSON.stringify(cached), 'EX', 60 * 10)
+        }
+      } 
+      return res.status(200).json({})
+    } catch (e) {
+      console.error(e)
+      return res.status(500).json({})
+    }
+    
 })
   
   export default handler

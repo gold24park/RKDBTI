@@ -1,9 +1,11 @@
 import mainStyles from "../styles/main.module.css";
-import { PrimaryButton, SecondaryButton } from "@components/Buttons";
+import { PrimaryButton, SecondaryButton } from "@components/button/Buttons";
 import { Layout } from "@components/Layout";
 import type { NextPage } from "next";
 import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
+import Link from "next/link";
+import { logEvent } from "@firebase/analytics";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -12,19 +14,40 @@ const Home: NextPage = () => {
     router.push("/test");
   };
 
+  const handleClickShare = () => {
+    
+    logEvent(window.FirebaseAnalytics, "share_home", {
+      url: location.href
+    })
+
+    if (navigator.share) {
+      navigator.share({
+        title: "내가 애니캐가 된다면",
+        url: location.href
+      }).then(() => {})
+      .catch(console.error)
+    } else {
+      navigator.clipboard.writeText(location.href)
+      alert("링크가 복사되었다능!")
+    }
+  }
+
   return (
     <Layout>
+      <div className={mainStyles.skewed3} />
       <div className={mainStyles.skewed2} />
       <div className={mainStyles.skewed1} />
-      <div className={mainStyles.railSimteBadge}>
-        <Image
-          src="/images/ic_youtube_kids.webp"
-          height={20}
-          width={20}
-          alt="김래일 유튜브"
-        />
-        김래일의 애니캐 심리테스트
-      </div>
+      <Link href="https://www.youtube.com/watch?v=2xmxOPCFEqE">
+        <div className={mainStyles.railSimteBadge}>
+          <Image
+            src="/images/ic_youtube_kids.webp"
+            height={20}
+            width={20}
+            alt="김래일 유튜브"
+          />
+          김래일의 애니캐 심리테스트
+        </div>
+      </Link>
       <h1 className={mainStyles.mainTitle}>
         애니
         <br />
@@ -44,7 +67,8 @@ const Home: NextPage = () => {
         와쿠와쿠...! 시작하기
       </PrimaryButton>
 
-      <SecondaryButton className={mainStyles.shareBtn}>
+
+      <SecondaryButton className={mainStyles.shareBtn} onClick={handleClickShare}>
         다른 오타쿠에게 공유하기
       </SecondaryButton>
 

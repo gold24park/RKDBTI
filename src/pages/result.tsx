@@ -1,6 +1,6 @@
-import { KakaoButton } from "@components/KakaoButton"
+import { KakaoButton } from "@components/button/KakaoButton"
 import { Layout } from "@components/Layout"
-import { TwitterButton } from "@components/TwitterButton"
+import { TwitterButton } from "@components/button/TwitterButton"
 import { Character } from "@services/models/Chracter"
 import { ResultConverter } from "@services/ResultConverter"
 import { Filter, FindOptions } from "mongodb"

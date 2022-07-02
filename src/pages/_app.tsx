@@ -10,6 +10,7 @@ import { getAnalytics } from "firebase/analytics";
 declare global {
   interface Window {
     Kakao: any;
+    FirebaseAnalytics: any;
   }
 }
 
@@ -17,10 +18,9 @@ function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
       if (typeof window !== "undefined") {
-        const analytics = getAnalytics(firebaseApp)
+        window.FirebaseAnalytics = getAnalytics(firebaseApp)
       }
   }, [])
-
 
   return (
     <>

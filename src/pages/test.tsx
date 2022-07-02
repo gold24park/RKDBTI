@@ -2,7 +2,7 @@ import { Layout } from "@components/Layout";
 import { NextPage } from "next";
 import { useState } from "react";
 import questions from "@services/json/questions.json";
-import { AnswerButton } from "@components/AnswerButton";
+import { AnswerButton } from "@components/button/AnswerButton";
 import { useRouter } from "next/router";
 import { ResultConverter } from "@services/ResultConverter";
 import { debounce } from "lodash";
@@ -16,6 +16,7 @@ enum Direction {
 const TestPage: NextPage = () => {
   const router = useRouter();
 
+  const [loading, setLoading] = useState<boolean>(false)
   const [answers, setAnswers] = useState<number[]>(new Array());
   const [scores, setScores] = useState<number[]>(
     new Array(questions[0].a[0].type.length).fill(0)
@@ -40,8 +41,10 @@ const TestPage: NextPage = () => {
   const handleClickAnswer = async (answer: number, typeScores: number[]) => {
     if (questionIndex == questions.length - 1) {
       // 마지막 답변을 했으므로 결과화면으로 이동합니다.
+      setLoading(true)
       let typeNumber = scores.indexOf(Math.max(...scores));
       await updateStatistics(typeNumber);
+      await new Promise(r => setTimeout(r, 1000));
       router.push({
         pathname: "/result",
         query: {
@@ -69,6 +72,14 @@ const TestPage: NextPage = () => {
       );
     }
   };
+
+  if (loading) {
+    return (
+      <Layout>
+        <h1>결과는~~~~바로바로~~~</h1>
+      </Layout>
+    )
+  }
 
   return (
     <Layout>
