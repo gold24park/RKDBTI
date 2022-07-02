@@ -12,16 +12,8 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-  
-  nginx:
-    depends_on:
-      - app
-    restart: unless-stopped
-    image: nginx:1.19-alpine
-    volumes: 
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - 8880:80
+      - 8880:3000
   
   mongo:
     image: mongo:4.4.13
