@@ -28,3 +28,8 @@
     height: 100%;
     background: #222;
 }
+@media (min-height: 1080px) {
+    .wrapper {
+        bottom: calc(50% - 540px + 1px);
+    }
+}

@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import styles from "@styles/progress.module.css";
 
 type Props = {

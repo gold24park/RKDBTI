@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { NavTextButton } from "./button/NavTextButton";
 import styled from "styled-components";
-import { ContainerWidth, NavbarHeight } from "@styles/size";
+import { ContainerWidth, media, NavbarHeight } from "@styles/size";
 
 /**
  * 네비바
@@ -29,6 +29,10 @@ const NavWrapper = styled.nav`
 
   div {
     flex: 1;
+  }
+
+  @media (min-height: 1080px) {
+    top: calc(50% - 540px + 1px);
   }
 `;
 
