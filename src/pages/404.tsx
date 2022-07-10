@@ -8,9 +8,9 @@ const App404: NextPage = () => {
             <div className={systemStyles.center}>
                 <h3 className={systemStyles.heading}>404</h3>
                 <p>
-                    낯선자여...아무래도 잘못찾아온 것 같군.<br/>
-                    자네가 원하던 페이지는 여기 없네.<br/>
-                    이만...돌아가게.
+                    어딜 들어온거야! 	『바보』..!<br/>
+                    이런모습 보여주고 싶지않은 내 맘도 모르구..<br/>
+                    어서 테스트나 하러가란 말이얏 ♥<br/>
                 </p>
             </div>
         </Layout>

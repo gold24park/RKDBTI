@@ -2,6 +2,7 @@ import Head from "next/head";
 import { ReactNode } from "react";
 
 type Props = {
+    wrapper?: string
     children?: ReactNode
 }
 
@@ -15,7 +16,7 @@ export const Layout = (props: Props) => (
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"></link>
       <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet"></link>
     </Head>
-    <div id="wrapper">
+    <div id={props.wrapper || "wrapper"}>
         {props.children}
     </div>
   </>

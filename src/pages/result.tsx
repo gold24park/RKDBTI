@@ -37,6 +37,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
     } as Filter<Character>, 
     {projection: {_id: 0}} as FindOptions)
 
+    console.log(typeNumber, character)
+
     if (character) {
         let relatedUniqueIds: number[] = [character?.good || 0, character.bad || 0]
 

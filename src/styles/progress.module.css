@@ -1,0 +1,30 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 20px;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1px;
+    background: white;
+    border-top: 1px solid #eee;
+    width: calc(100% - 2px);
+    max-width: calc(500px - 2px);
+}
+.progressBackground {
+    height: 5px;
+    background: #eee;
+    border: 1px solid black;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.progressForeground {
+    height: 100%;
+    background: #222;
+}

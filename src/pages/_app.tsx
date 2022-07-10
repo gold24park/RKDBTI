@@ -1,11 +1,12 @@
 import type { AppProps } from "next/app";
 import { GlobalStyle } from "@styles/global-style";
 import { theme } from "@styles/theme";
-import { ThemeProvider } from "styled-components";
+import { css, ThemeProvider } from "styled-components";
 import Script from "next/script";
 import { useEffect } from "react";
 import { firebaseApp } from "@services/firebaseApp";
 import { getAnalytics } from "firebase/analytics";
+import Head from "next/head";
 
 declare global {
   interface Window {

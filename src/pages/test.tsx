@@ -1,12 +1,17 @@
 import { Layout } from "@components/Layout";
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import questions from "@services/json/questions.json";
 import { AnswerButton } from "@components/button/AnswerButton";
 import { useRouter } from "next/router";
 import { ResultConverter } from "@services/ResultConverter";
 import { debounce } from "lodash";
+import Image from "next/image";
 import { Navbar } from "@components/Navbar";
+import testStyles from "../styles/test.module.css";
+import { ProgressBar } from "@components/ProgressBar";
+import loadingStyles from "../styles/loading.module.css";
+import { LoadingLayout } from "@components/LoadingLayout";
 
 enum Direction {
   NEXT = 1,
@@ -16,12 +21,20 @@ enum Direction {
 const TestPage: NextPage = () => {
   const router = useRouter();
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [answers, setAnswers] = useState<number[]>(new Array());
   const [scores, setScores] = useState<number[]>(
     new Array(questions[0].a[0].type.length).fill(0)
   );
   const [questionIndex, setQuestionIndex] = useState<number>(0);
+
+  // 답변 선택후 스크롤 가장 위로
+  useEffect(() => {
+    const wrapper = document.querySelector("#test_wrapper");
+    if (wrapper) {
+      wrapper.scrollTop = 0;
+    }
+  }, scores);
 
   const updateStatistics = async (typeNumber: number) => {
     await fetch(`/api/statistics`, {
@@ -41,10 +54,15 @@ const TestPage: NextPage = () => {
   const handleClickAnswer = async (answer: number, typeScores: number[]) => {
     if (questionIndex == questions.length - 1) {
       // 마지막 답변을 했으므로 결과화면으로 이동합니다.
-      setLoading(true)
+      setLoading(true);
       let typeNumber = scores.indexOf(Math.max(...scores));
-      await updateStatistics(typeNumber);
-      await new Promise(r => setTimeout(r, 1000));
+      console.log(typeNumber, scores)
+
+      if (typeNumber > 0) {
+        await updateStatistics(typeNumber);
+        await new Promise((r) => setTimeout(r, 500));
+      }
+
       router.push({
         pathname: "/result",
         query: {
@@ -76,38 +94,57 @@ const TestPage: NextPage = () => {
   if (loading) {
     return (
       <Layout>
-        <h1>결과는~~~~바로바로~~~</h1>
+        <LoadingLayout>
+          <div className={loadingStyles.text}>
+            <i>만약에</i>
+            <br />
+            <h4 className={testStyles.dots}>⋮</h4>
+          </div>
+          <div className={loadingStyles.speechBubble}>
+            <div style={{ fontSize: "34px" }}>
+              당신이
+              <br />
+              <b>애니캐릭터</b>라면...
+            </div>
+          </div>
+        </LoadingLayout>
       </Layout>
-    )
+    );
   }
 
   return (
-    <Layout>
-      <Navbar/>
-      <h1>
-        {questionIndex + 1}. {questions[questionIndex].q}
-      </h1>
+    <Layout wrapper="test_wrapper">
+      <Navbar onClickBack={handleClickBack} />
 
-      <button onClick={handleClickBack}>뒤로</button>
+      <pre className={testStyles.question}>{questions[questionIndex].q}</pre>
 
-      <br />
+      <div className={testStyles.illustWrapper}>
+        <Image
+          className="image"
+          src="https://via.placeholder.com/1280x720.png"
+          layout="fill"
+          objectFit="cover"
+          alt={questions[questionIndex].q}
+        />
+      </div>
 
-      {questions[questionIndex].a.map(({ answer, type }, answerIndex) => (
-        <AnswerButton
-          key={`answer_${answerIndex}`}
-          onClick={debounce(async () => {
-            await handleClickAnswer(answerIndex, type);
-          }, 50)}
-        >
-          {answer}
-        </AnswerButton>
-      ))}
+      <h1 className={testStyles.dots}>⋮</h1>
 
-      <code>
-        scores: {JSON.stringify(scores)}
-        <br />
-        answers: {JSON.stringify(answers)}
-      </code>
+      <div className={testStyles.buttonWrapper}>
+        {questions[questionIndex].a.map(({ answer, type }, answerIndex) => (
+          <AnswerButton
+            index={answerIndex}
+            key={`answer_${answerIndex}`}
+            onClick={debounce(async () => {
+              await handleClickAnswer(answerIndex, type);
+            }, 50)}
+          >
+            {answer}
+          </AnswerButton>
+        ))}
+      </div>
+
+      <ProgressBar current={questionIndex + 1} total={questions.length} />
     </Layout>
   );
 };

@@ -1,4 +1,5 @@
 import { MyCharacterResult } from "@services/models/MyCharacterResult";
+import { media } from "@styles/size";
 import styled from "styled-components";
 
 export type Props = {
@@ -11,16 +12,15 @@ export type Props = {
  */
 export const DefaultButton = styled.button`
     display: inline-block;
-    outline: solid 2px;
-    border-color: black;
+    border: 3px solid black;
     font-family: 'ChosunBg', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     height: 60px;
     width: 100%;
     cursor: pointer;
 
-    @media only screen and (max-width: 480px) {
-        font-size: 18px;
+    ${media.phone} {
+        font-size: 15px;
     }
 `
 
@@ -28,14 +28,27 @@ export const DefaultButton = styled.button`
  * SNS 버튼 공통 스타일링
  */
  export const SnsButton = styled(DefaultButton)`
- background-color: blue;
- border: none;
+    background-color: blue;
+    border: none;
 `
 
 export const PrimaryButton = styled(DefaultButton)`
-    background: #2A7ED3;
+    background: #444;
+    color: white;
+    &:hover,
+    &:active {
+        background: #2A7ED3;
+        transition: ease 200ms;
+        color: white;
+    }
 `
 
 export const SecondaryButton = styled(DefaultButton)`
-    background: #ECECF3;
+    background: transparent;
+    &:hover,
+    &:active {
+        background: #2A7ED3;
+        transition: ease 200ms;
+        color: white;
+    }
 `

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { NavbarHeight } from "./size";
 
 export const GlobalStyle = createGlobalStyle`
     /* 만화영어 폰트는 'Limelight' */
@@ -44,16 +45,42 @@ export const GlobalStyle = createGlobalStyle`
     }
     #wrapper {
         position: absolute;
-        padding: 20px;
         border: 1px solid black;
         width: 100%;
         height: 100%;
         overflow: hidden;
         box-shadow: 10px 10px 0px black;
     }
+    #test_wrapper {
+        position: absolute;
+        border: 1px solid black;
+        width: 100%;
+        height: 100%;
+        padding-top: ${NavbarHeight}px;
+        padding-bottom: 36px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        box-shadow: 10px 10px 0px black;
+    }
     * {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
+    }
+
+    
+    ::-webkit-scrollbar {
+        width: 4px;  /* 스크롤바의 너비 */
+        height: 100%;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        height: 20%; /* 스크롤바의 길이 */
+        background: #bbb; /* 스크롤바의 색상 */
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: white;
     }
 `;
