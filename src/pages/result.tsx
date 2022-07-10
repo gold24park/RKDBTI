@@ -25,6 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
     await middleware.run(req, res)
     
     const { type } = query
+    
 
     const db = (req as DatabaseRequest).db
 
@@ -57,6 +58,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
             bad
         };
     }
+
+    console.log("ASDKASJDKLASJDKLASJDKLASJDKLAS")
 
     const url = req.headers["referer"] || null
 

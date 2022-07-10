@@ -19,10 +19,11 @@ handler.use(getDatabase).get<DatabaseRequest, NextApiResponse>(async (req, res) 
         })
     })
 
-    await req.db.characters?.bulkWrite(upsertTasks)
+    let result = await req.db.characters?.bulkWrite(upsertTasks)
 
     res.status(200).json({ 
-        ...characterList,
+        result,
+        characterList,
     });
 })
 
