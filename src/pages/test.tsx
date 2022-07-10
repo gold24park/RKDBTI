@@ -55,8 +55,8 @@ const TestPage: NextPage = () => {
     if (questionIndex == questions.length - 1) {
       // 마지막 답변을 했으므로 결과화면으로 이동합니다.
       setLoading(true);
+      
       let typeNumber = scores.indexOf(Math.max(...scores));
-      console.log(typeNumber, scores)
 
       if (typeNumber > 0) {
         await updateStatistics(typeNumber);
