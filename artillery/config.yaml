@@ -1,0 +1,24 @@
+config:
+  target: "https://rail-o-taku.space"
+  http:
+    timeout: 7
+  phases:
+      # The following example generates 50 virtual users every second for 5 minutes:
+      - duration: 60
+        arrivalRate: 10
+        maxVusers: 200
+  variables:
+    typeNumbers:
+      - [1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,16,17]
+scenarios:
+  - flow:
+    - loop:
+      - get: 
+          url: "/api/statistics"
+          qs:
+            typeNumber: "{{ $loopElement }}"
+      - post:
+          url: "/api/statistics"
+          json:
+            typeNumber: "{{ $loopElement }}"
+      over: typeNumbers
