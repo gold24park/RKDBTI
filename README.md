@@ -74,3 +74,5 @@ mongodb
 - 트위터 공유 ([https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview](https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview))
 - 카카오톡 공유 ([https://developers.kakao.com/docs/latest/ko/message/js-link](https://developers.kakao.com/docs/latest/ko/message/js-link))
 - SEO
+
+npx artillery quick --count 100 -n 50 http://localhost:8880/api/

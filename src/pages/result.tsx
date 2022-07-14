@@ -59,8 +59,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
         };
     }
 
-    console.log("ASDKASJDKLASJDKLASJDKLASJDKLAS")
-
     const url = req.headers["referer"] || null
 
     return {

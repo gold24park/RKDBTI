@@ -48,8 +48,16 @@ handler.use(getSession).use(getDatabase)
 })
 .post<DatabaseRequest, NextApiResponse>(async (req, res) => {
     try {
-      let typeNumber = parseInt(JSON.parse(req.body).typeNumber as string, 0)
+      let typeNumber = 0
+      if (Object.keys(req.body).includes("typeNumber")) {
+          typeNumber = parseInt(req.body.typeNumber)
+      } else {
+          parseInt(JSON.parse(req.body).typeNumber as string, 0)
+      }
       let column = `type${typeNumber}`;
+
+      console.log('post', typeNumber)
+
       if (req.session != null) {
         let cached: number[] = JSON.parse((await redis.get(req.session)) || "[]")
         if (!cached.includes(typeNumber)) {

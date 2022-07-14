@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 
 services:
   app:
@@ -18,8 +18,12 @@ services:
   mongo:
     image: mongo:4.4.13
     restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME="${MONGO_USER}"
+      - MONGO_INITDB_ROOT_PASSWORD="${MONGO_PASS}"
     ports:
       - 27017:27017
+    command: mongod --auth
     volumes:
       - ./mongo/data:/data
       - ./mongo/data/configdb:/data/configdb

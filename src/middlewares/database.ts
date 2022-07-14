@@ -1,7 +1,7 @@
 import * as mongo from "mongodb";
 import { AppApiRequest } from "./session";
 
-const MONGO_URI = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`
+const MONGO_URI = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`
 
 interface Database {
   client?: mongo.MongoClient;
