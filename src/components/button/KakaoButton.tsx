@@ -52,7 +52,7 @@ export const KakaoButton = ({ shareTitle, result }: Props) => {
     <SnsButton
       onClick={handleOnClick}
       backgroundColor={theme.colors.kakao}
-      color={theme.colors.kakaoBlack}
+      fontColor={theme.colors.kakaoBlack}
     >
       <img src="/images/kakao.png" />
       카카오톡 공유하기
