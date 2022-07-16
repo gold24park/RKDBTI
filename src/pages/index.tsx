@@ -2,15 +2,15 @@ import { PrimaryButton, SecondaryButton } from "@components/button/Buttons";
 import { Copyright } from "@components/Copyright";
 import { Layout } from "@components/Layout";
 import { logEvent } from "@firebase/analytics";
-import { fetcher } from "@services/fetcher";
-import { StatisticsResult } from "@services/models/StatisticsResult";
+import { DatabaseRequest, getDatabase } from "@middlewares/database";
 import { media, size } from "@styles/size";
-import type { NextPage } from "next";
+import { FindOptions } from "mongodb";
+import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
+import nc from "next-connect";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
-import useSWR from "swr";
 
 const Title = styled.h1`
   font-family: "ChosunKm", serif;
@@ -19,7 +19,8 @@ const Title = styled.h1`
   top: ${size.content_padding}px;
   left: 10px;
   color: black;
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    1px 1px 0 #fff;
   margin: 2rem 0 10px 0;
   ${media.phone} {
     font-size: 48px;
@@ -126,8 +127,43 @@ const RailComicsOne = styled.h2`
   }
 `;
 
-const Home: NextPage = () => {
-  const { data, error } = useSWR<StatisticsResult>(`/api/count`, fetcher);
+const StartButtonWrapper = styled.div`
+  position: absolute;
+  bottom: calc(60px + ${size.button_height}px + 10px);
+  width: calc(100% - ${size.content_padding * 2}px) !important;
+`
+
+const ShareButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 60px;
+  width: calc(100% - ${size.content_padding * 2}px) !important;
+`
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {  
+  const middleware = nc().use(getDatabase);
+  await middleware.run(req, res);
+
+  let request = req as DatabaseRequest
+
+  let totalCount = 0;
+
+  try {
+    let statistics = await request.db.statistics?.findOne({}, {
+      projection: { _id: 0 },
+    } as FindOptions);
+
+    totalCount = statistics ? Object.values(statistics).reduce((p, c) => p + c) : 0;
+  } catch (e) {
+    // ignore
+    console.log(e);
+  }
+  return {
+    props: { totalCount },
+  };
+};
+
+
+const Home: NextPage = ({ totalCount }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -185,38 +221,32 @@ const Home: NextPage = () => {
         <RailComicsHeading>RAIL COMICS</RailComicsHeading>
         <RailComicsOne>1</RailComicsOne>
 
-        {data && data.totalCount > 0 && (
+        {totalCount > 0 && (
           <Counter>
-            {data.totalCount.toLocaleString("en-US")}명이 참여했어요
+            {totalCount.toLocaleString("en-US")}명이 참여했어요
           </Counter>
         )}
 
-        <div style={{
-          position: "absolute",
-          bottom: `calc(60px + ${size.button_height}px + 10px)`,
-          width: `calc(100% - ${size.content_padding * 2}px) !important`
-        }}>
+        <StartButtonWrapper>
           <PrimaryButton onClick={handleClick}>
             와쿠와쿠...! 시작하기
           </PrimaryButton>
-        </div>
+        </StartButtonWrapper>
 
-        <div style={{
-          position: "absolute",
-          bottom: "60px",
-          width: `calc(100% - ${size.content_padding * 2}px) !important`
-        }}>
+        <ShareButtonWrapper>
           <SecondaryButton onClick={handleClickShare}>
             다른 오타쿠에게 공유하기
           </SecondaryButton>
-        </div>
+        </ShareButtonWrapper>
 
-        <div style={{
-          position: "absolute",
-          bottom: "14px",
-          left: "50%",
-          transform: "translateX(-50%)"
-        }}>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "14px",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
           <Copyright />
         </div>
       </div>

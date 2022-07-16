@@ -52,7 +52,7 @@ handler.use(getSession).use(getDatabase)
       if (Object.keys(req.body).includes("typeNumber")) {
           typeNumber = parseInt(req.body.typeNumber)
       } else {
-          parseInt(JSON.parse(req.body).typeNumber as string, 0)
+          typeNumber = parseInt(JSON.parse(req.body).typeNumber as string, 0)
       }
 
       let column = `type${typeNumber}`;
