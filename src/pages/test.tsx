@@ -53,10 +53,11 @@ const TestPage: NextPage = () => {
 
   const handleClickAnswer = async (answer: number, typeScores: number[]) => {
     if (questionIndex == questions.length - 1) {
+      const finalScores = scores.map((v, i) => v + typeScores[i] * Direction.NEXT)
       // 마지막 답변을 했으므로 결과화면으로 이동합니다.
       setLoading(true);
       
-      let typeNumber = scores.indexOf(Math.max(...scores)) + 1;
+      let typeNumber = finalScores.indexOf(Math.max(...finalScores)) + 1;
 
       if (typeNumber > 0) {
         await updateStatistics(typeNumber);
@@ -143,7 +144,7 @@ const TestPage: NextPage = () => {
           </AnswerButton>
         ))}
       </div>
-
+      <pre>{scores[10]}</pre>
       <ProgressBar current={questionIndex + 1} total={questions.length} />
     </Layout>
   );
