@@ -83,7 +83,7 @@ export const YoutubeAdvertisement = ({ title, subtitle, youtubeUrl, twitchUrl }:
                     <b>유튜브 채널 바로가기</b>
                 </Ad>
             </Link>
-            <Link href={youtubeUrl}>
+            <Link href={twitchUrl}>
                 <Ad>
                     <CircleImageWrapper>
                         <img src="https://via.placeholder.com/120x120.png"/>
