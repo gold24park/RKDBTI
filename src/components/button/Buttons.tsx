@@ -24,12 +24,41 @@ export const DefaultButton = styled.button`
     }
 `
 
+export const TextButton = styled(DefaultButton)`
+    border: none;
+    background: none;
+    height: 50px;
+    padding: 10px;
+    border-radius: 16px;
+    &:hover {
+        font-size: 19px;
+        transition: ease 300ms;
+    }
+`
+
 /**
  * SNS 버튼 공통 스타일링
  */
- export const SnsButton = styled(DefaultButton)`
+export const SnsButton = styled(DefaultButton)<{
+    backgroundColor: string;
+    fontColor: string;
+}>`
     background-color: blue;
-    border: none;
+    position: relative;
+    background: ${({ backgroundColor }) => backgroundColor};
+    color: ${({ fontColor }) => fontColor};
+    margin-bottom: 10px;
+    img {
+        position: absolute;
+        width: 30px;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:hover {
+        transition: ease 200ms;
+        background: ${({ backgroundColor }) => `${backgroundColor}AA`}
+    }
 `
 
 export const PrimaryButton = styled(DefaultButton)`

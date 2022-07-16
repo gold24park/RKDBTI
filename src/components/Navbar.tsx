@@ -26,13 +26,14 @@ const NavWrapper = styled.nav`
   max-width: ${ContainerWidth - 2}px;
   background: white;
   z-index: 1;
+  border-bottom: 1px solid #eee;
 
   div {
     flex: 1;
   }
 
   @media (min-height: 1080px) {
-    top: calc(50% - 540px + 1px);
+    top: calc(50% - 540px + 2px);
   }
 `;
 

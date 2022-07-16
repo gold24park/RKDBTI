@@ -56,8 +56,6 @@ handler.use(getSession).use(getDatabase)
       }
       let column = `type${typeNumber}`;
 
-      console.log('post', typeNumber)
-
       if (req.session != null) {
         let cached: number[] = JSON.parse((await redis.get(req.session)) || "[]")
         if (!cached.includes(typeNumber)) {
@@ -79,5 +77,5 @@ handler.use(getSession).use(getDatabase)
     
 })
   
-  export default handler
+export default handler
   

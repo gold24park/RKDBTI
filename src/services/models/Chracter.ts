@@ -3,6 +3,7 @@ import { WithId, Document } from "mongodb";
 export interface Character extends WithId<Document> {
     unique_id?: number;
     name?: string;
+    ment?: string;
     image?: string;
     description?: string;
     good?: number;

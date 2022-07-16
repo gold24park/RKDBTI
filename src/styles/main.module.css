@@ -1,15 +1,6 @@
-.mainTitle {
-    font-family: 'ChosunKm', serif;
-    font-size: 66px;
-    position: relative;
-    top: 20px;
-    left: 10px;
-    color: black;
-    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-}
 .startBtn {
     position: absolute;
-    bottom: calc(60px + 60px + 14px);
+    bottom: calc(60px + 60px + 10px);
     width: calc(100% - 40px) !important;
 }
 .shareBtn {
@@ -21,9 +12,7 @@
     position: absolute;
     bottom: 14px;
     left: 50%;
-    font-size: 14px;
     transform: translateX(-50%);
-    color: #8c8f92;
 }
 .railComics {
     font-family: 'Limelight', monospace;

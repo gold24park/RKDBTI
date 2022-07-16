@@ -1,18 +1,24 @@
+import { TextButton } from "@components/button/Buttons"
 import { KakaoButton } from "@components/button/KakaoButton"
-import { Layout } from "@components/Layout"
 import { TwitterButton } from "@components/button/TwitterButton"
+import { Copyright } from "@components/Copyright"
+import { Layout } from "@components/Layout"
+import { Navbar } from "@components/Navbar"
+import { RelatedCharacter } from "@components/RelatedCharacter"
+import { Result } from "@components/Result"
+import { YoutubeAdvertisement } from "@components/YoutubeAdvertisement"
+import { DatabaseRequest, getDatabase } from "@middlewares/database"
+import { fetcher } from "@services/fetcher"
 import { Character } from "@services/models/Chracter"
+import { MyCharacterResult } from "@services/models/MyCharacterResult"
+import { StatisticsResult } from "@services/models/StatisticsResult"
 import { ResultConverter } from "@services/ResultConverter"
 import { Filter, FindOptions } from "mongodb"
 import { GetServerSideProps } from "next"
-import Head from "next/head"
 import nc from "next-connect"
+import Head from "next/head"
+import Link from "next/link"
 import useSWR from 'swr'
-import { fetcher } from "@services/fetcher"
-import { DatabaseRequest, getDatabase } from "@middlewares/database"
-import { MyCharacterResult } from "@services/models/MyCharacterResult"
-import { StatisticsResult } from "@services/models/StatisticsResult"
-import { Navbar } from "@components/Navbar"
 
 type Props = {
     result: MyCharacterResult | null,
@@ -38,14 +44,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
     } as Filter<Character>, 
     {projection: {_id: 0}} as FindOptions)
 
-    console.log(typeNumber, character)
-
     if (character) {
         let relatedUniqueIds: number[] = [character?.good || 0, character.bad || 0]
 
         let relatedCharacters = await db.characters?.aggregate([
             {$match: {unique_id: {$in: relatedUniqueIds}}},
-            {$project: {unique_id: 1, name: 1, image: 1, _id: 0}}
+            {$project: {unique_id: 1, name: 1, image: 1, main_color: 1, _id: 0}}
         ]).toArray()
 
         // 잘 맞는 캐릭터와 아닌 캐릭터
@@ -82,7 +86,7 @@ function ResultPage({ result, url }: Props) {
     const twitterShareTitle = `내가 애니캐가 된다면\n${result.name}일지도?`
 
     return (
-        <Layout>
+        <Layout wrapper="result_wrapper">
             <Navbar/>
             <Head>
                 <meta property="og:url" content={url || ""} />
@@ -90,19 +94,29 @@ function ResultPage({ result, url }: Props) {
                 <meta property="og:image" content={result.image} />
                 <meta property="og:description" content={result.description} />
             </Head>
-            <h1>당신의 타입은 {result.unique_id}</h1>
-            <code>
-                {JSON.stringify(result)}
-            </code>
-            {
-                data && (
-                    <code>{JSON.stringify(data)}</code>
-                )
-            }
+            <Result result={result} data={data}/>
+            <br />
+            <RelatedCharacter isGood={true} result={result}/>
+            <br />
+            <RelatedCharacter isGood={false} result={result}/>
+            <br />
             <br />
             <TwitterButton shareTitle={twitterShareTitle} result={result} />
             <br />
             <KakaoButton shareTitle={kakaoShareTitle} result={result} />
+            <Link href="/">
+                <TextButton>처음으로</TextButton>
+            </Link>
+            <br />
+            <br />
+            <YoutubeAdvertisement 
+                subtitle="2D전문 인류학자"
+                title="김래일"
+                youtubeUrl="https://www.youtube.com/c/%EA%B9%80%EB%9E%98%EC%9D%BC"
+                twitchUrl="https://www.twitch.tv/rail_kim"
+            />
+            <br />
+            <Copyright/>
         </Layout>
     )
 }

@@ -8,5 +8,8 @@ export const theme = {
     text100: "#cbcccd",
     surface: "#f3f5f9",
     divider: "#dddedf",
+    twitter: "#1DA1F2",
+    kakao: "#F9E000",
+    kakaoBlack: "#3c1e1e"
   },
 };

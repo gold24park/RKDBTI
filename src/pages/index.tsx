@@ -1,13 +1,44 @@
-import mainStyles from "../styles/main.module.css";
 import { PrimaryButton, SecondaryButton } from "@components/button/Buttons";
+import { Copyright } from "@components/Copyright";
 import { Layout } from "@components/Layout";
-import type { NextPage } from "next";
-import Image from "next/image";
-import { useRouter } from "next/dist/client/router";
-import Link from "next/link";
 import { logEvent } from "@firebase/analytics";
+import { fetcher } from "@services/fetcher";
+import { StatisticsResult } from "@services/models/StatisticsResult";
+import { media } from "@styles/size";
+import type { NextPage } from "next";
+import { useRouter } from "next/dist/client/router";
+import Image from "next/image";
+import Link from "next/link";
+import styled from "styled-components";
+import useSWR from "swr";
+import mainStyles from "../styles/main.module.css";
+
+const Title = styled.h1`
+  font-family: 'ChosunKm', serif;
+  font-size: 66px;
+  position: relative;
+  top: 20px;
+  left: 10px;
+  color: black;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  margin: 2rem 0 10px 0;
+  ${media.phone} {
+    font-size: 50px;
+  }
+`;
+
+const Counter = styled.div`
+  margin-left: 20px;
+  font-weight: bold;
+  background: #eee;
+  padding: 6px 12px;
+  position: absolute;
+  border-radius: 10px;
+  left 10px;
+`;
 
 const Home: NextPage = () => {
+  const { data, error } = useSWR<StatisticsResult>(`/api/count`, fetcher)
   const router = useRouter();
 
   const handleClick = () => {
@@ -50,7 +81,7 @@ const Home: NextPage = () => {
             김래일의 애니캐 심리테스트
           </div>
         </Link>
-        <h1 className={mainStyles.mainTitle}>
+        <Title>
           애니
           <br />
           캐릭터가
@@ -58,12 +89,18 @@ const Home: NextPage = () => {
           되어버린
           <br />
           나...
-        </h1>
+        </Title>
+        
         <br />
 
         <h2 className={mainStyles.railComics}>RAIL COMICS</h2>
 
         <h2 className={mainStyles.railComicsOne}>1</h2>
+
+        { data && data.totalCount > 0 && (
+            <Counter>{data.totalCount.toLocaleString('en-US')}명이 참여했어요</Counter>
+          )
+        }
 
         <PrimaryButton className={mainStyles.startBtn} onClick={handleClick}>
           와쿠와쿠...! 시작하기
@@ -76,7 +113,7 @@ const Home: NextPage = () => {
           다른 오타쿠에게 공유하기
         </SecondaryButton>
 
-        <p className={mainStyles.copyRight}>Copyright 2022 RailKim</p>
+        <Copyright className={mainStyles.copyRight} />
       </div>
     </Layout>
   );

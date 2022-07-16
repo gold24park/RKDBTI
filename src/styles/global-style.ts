@@ -62,6 +62,16 @@ export const GlobalStyle = createGlobalStyle`
         overflow-y: scroll;
         box-shadow: 10px 10px 0px black;
     }
+    #result_wrapper {
+        position: absolute;
+        border: 1px solid black;
+        width: 100%;
+        height: 100%;
+        padding: ${NavbarHeight}px 20px 36px 20px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        box-shadow: 10px 10px 0px black;
+    }
     * {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
