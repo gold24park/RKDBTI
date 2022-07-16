@@ -12,4 +12,5 @@ export interface MyCharacterResult {
     goodment?: string;
     bad?: Character;
     badment?: string;
+    main_color: string;
 }

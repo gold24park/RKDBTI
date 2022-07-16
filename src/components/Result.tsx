@@ -1,7 +1,5 @@
-import {
-  MyCharacterResult,
-  StatisticsResult,
-} from "@services/models/StatisticsResult";
+import { MyCharacterResult } from "@services/models/MyCharacterResult";
+import { StatisticsResult } from "@services/models/StatisticsResult";
 import { media } from "@styles/size";
 import styled from "styled-components";
 
