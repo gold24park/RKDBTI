@@ -1,78 +1,43 @@
+# RKDBTI?
+
+Next.js로 구현한 애니메이션 캐릭터 유형별 성격을 진단하는 심리 테스트 페이지 입니다.
+
 ## Getting Started
 
-### 도커로 실행하기
+1. 다음의 명령어를 실행합니다.
 
 ```
+yarn install
 cd dkc
-docker-compose up --build -d # 소스코드를 수정하여 이미지 빌드를 원할시 --build 붙여준다.
+docker-compose up --build -d
 ```
 
-sample/mongo를 dkc/mongo에 복사하여 테스트 데이터가 들어간 채로 mongodb 시작가능합니다.
-
-docker로 실행후 `http://localhost:8880` 접속하여 확인
-
-### 개발환경에서 실행하기
+2. 캐릭터 정보(characters.json)를 mongodb에 옮기기 위해 API를 호출합니다.
 
 ```
-yarn dev
-or
-./run.sh dev
+curl http://localhost:8880/api/init
 ```
 
-### 환경변수
+## Environment variables Example
 
 ```
-.env.local 공용 환경변수
-.env.production.local 프로덕션
-.env.development.local 개발용
+MONGO_HOST=mongo
+MONGO_PORT=27017
+MONGO_USER="mongouser"
+MONGO_PASS="mongopassword"
+MONGO_DATABASE="mychar_db"
+
+REDIS_URI=redis://redis:6379
+
+NEXT_PUBLIC_KAKAO_API_KEY="yourkakaoapikey"
+NEXT_PUBLIC_FIREBASE_API_KEY="fbapikey"
+NEXT_PUBLIC_FIREBASE_APP_ID="fbappid"
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="fbsenderid"
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="fbmid"
 ```
 
-sample/.env.local에 예시 환경변수 설정을 적어두었습니다.
+## Pages
 
-### Pages
-
-- /: 홈
-- /test: 테스트 수행 페이지
-- /result: 결과 페이지
-
-### API endpoints
-
-```
-[POST] /api/result?typeNumber=<number>
-```
-
-가장 높은 점수를 받은 유형을 받아서 통계에 추가하고, 관련 정보를 내려줍니다.
-새로고침을 통해 무분별하게 통계가 집계되는 사태를 방지하기 위해 같은 세션기준 유형별로 10분 안에는 집계되지 않습니다.
-(예시 데이터는 sample/api.result 확인)
-
-## TODO List
-
-- [ ] 스타일링, 컴포넌트 만들기
-- [ ] 에러 페이지 생성
-- [ ] Firebase 연동
-- [x] 서버에 docker 설치
-- [ ] 도메인 설정
-- [ ] 광고 붙이기
-
-## 계획
-
-```
-cloudflare
-
-docker
- -- nginx
- -- mongodb
- -- next.js
-
-firebase [링크](https://console.firebase.google.com/u/0/project/rkdbti/overview)
-
-mongodb
- -- characters: 유형별 정보 collection
- -- statistics: 유형별 통계 collection
-```
-
-- 트위터 공유 ([https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview](https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview))
-- 카카오톡 공유 ([https://developers.kakao.com/docs/latest/ko/message/js-link](https://developers.kakao.com/docs/latest/ko/message/js-link))
-- SEO
-
-npx artillery quick --count 100 -n 50 http://localhost:8880/api/
+- `/`: 메인
+- `/test`: 테스트 수행 페이지
+- `/result`: 결과 페이지
