@@ -1,7 +1,9 @@
 import { MyCharacterResult } from "@services/models/MyCharacterResult";
 import { media } from "@styles/size";
 import styled from "styled-components";
+import Image from "next/image";
 import { SectionTitle } from "./SectionTitle";
+import { BaseImageWrapper } from "./BaseImageWrapper";
 
 const RelatedCharacterWrapper = styled.div`
   display: flex;
@@ -65,22 +67,14 @@ const Ment = styled.p`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 1;
   position: relative;
 `;
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled(BaseImageWrapper)`
   width: 160px;
-  img {
-    object: cover;
-    width: 160px;
-  }
   ${media.phone} {
     width: 120px;
-    img {
-        object: cover;
-        width: 120px;
-    } 
   }
 `;
 
@@ -104,7 +98,11 @@ export const RelatedCharacter = ({ isGood, result }: Props) => {
         </Number>
         </ContentWrapper>
         <ImageWrapper>
-          <img src={character?.image} />
+          <Image 
+            src={"https://via.placeholder.com/160x160.png"} 
+            width={160} height={160} 
+            alt={character?.name}
+          />
         </ImageWrapper>
       </RelatedCharacterWrapper>
     </>

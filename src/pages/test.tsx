@@ -1,22 +1,57 @@
-import { Layout } from "@components/Layout";
-import { NextPage } from "next";
-import { useEffect, useState } from "react";
-import questions from "@services/json/questions.json";
+import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { AnswerButton } from "@components/button/AnswerButton";
-import { useRouter } from "next/router";
-import { ResultConverter } from "@services/ResultConverter";
-import { debounce } from "lodash";
-import Image from "next/image";
+import { Layout } from "@components/Layout";
+import { TestDots, TestLoading } from "@components/LoadingLayout";
 import { Navbar } from "@components/Navbar";
-import testStyles from "../styles/test.module.css";
 import { ProgressBar } from "@components/ProgressBar";
-import loadingStyles from "../styles/loading.module.css";
-import { LoadingLayout } from "@components/LoadingLayout";
+import questions from "@services/json/questions.json";
+import { ResultConverter } from "@services/ResultConverter";
+import { media } from "@styles/size";
+import { debounce } from "lodash";
+import { NextPage } from "next";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 
 enum Direction {
   NEXT = 1,
   PREV = -1,
 }
+
+const TestQuestion = styled.pre`
+  font-family: "ChosunKm", serif;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px;
+  white-space: break-spaces;
+  ${media.phone} {
+    font-size: 18px;
+  }
+`;
+
+const TestIllustWrapper = styled(BaseImageWrapper)`
+  width: calc(100% - 40px);
+  aspect-ratio: 16 / 9;
+  border: 3px solid black;
+  margin: auto;
+  height: auto;
+  img {
+    width: 100%;
+    height: 100%;
+    position: relative !important;
+    object-fit: cover;
+  }
+`;
+
+
+const AnswerWrapper = styled.div`
+  padding: 0 20px;
+`;
 
 const TestPage: NextPage = () => {
   const router = useRouter();
@@ -53,10 +88,12 @@ const TestPage: NextPage = () => {
 
   const handleClickAnswer = async (answer: number, typeScores: number[]) => {
     if (questionIndex == questions.length - 1) {
-      const finalScores = scores.map((v, i) => v + typeScores[i] * Direction.NEXT)
+      const finalScores = scores.map(
+        (v, i) => v + typeScores[i] * Direction.NEXT
+      );
       // 마지막 답변을 했으므로 결과화면으로 이동합니다.
       setLoading(true);
-      
+
       let typeNumber = finalScores.indexOf(Math.max(...finalScores)) + 1;
 
       if (typeNumber > 0) {
@@ -95,20 +132,7 @@ const TestPage: NextPage = () => {
   if (loading) {
     return (
       <Layout>
-        <LoadingLayout>
-          <div className={loadingStyles.text}>
-            <i>만약에</i>
-            <br />
-            <h4 className={testStyles.dots}>⋮</h4>
-          </div>
-          <div className={loadingStyles.speechBubble}>
-            <div style={{ fontSize: "34px" }}>
-              당신이
-              <br />
-              <b>애니캐릭터</b>라면...
-            </div>
-          </div>
-        </LoadingLayout>
+        <TestLoading/>
       </Layout>
     );
   }
@@ -117,9 +141,9 @@ const TestPage: NextPage = () => {
     <Layout wrapper="test_wrapper">
       <Navbar onClickBack={handleClickBack} />
 
-      <pre className={testStyles.question}>{questions[questionIndex].q}</pre>
+      <TestQuestion>{questions[questionIndex].q}</TestQuestion>
 
-      <div className={testStyles.illustWrapper}>
+      <TestIllustWrapper>
         <Image
           className="image"
           src="https://via.placeholder.com/1280x720.png"
@@ -127,11 +151,11 @@ const TestPage: NextPage = () => {
           objectFit="cover"
           alt={questions[questionIndex].q}
         />
-      </div>
+      </TestIllustWrapper>
 
-      <h1 className={testStyles.dots}>⋮</h1>
+      <TestDots>⋮</TestDots>
 
-      <div className={testStyles.buttonWrapper}>
+      <AnswerWrapper>
         {questions[questionIndex].a.map(({ answer, type }, answerIndex) => (
           <AnswerButton
             index={answerIndex}
@@ -143,7 +167,7 @@ const TestPage: NextPage = () => {
             {answer}
           </AnswerButton>
         ))}
-      </div>
+      </AnswerWrapper>
       <ProgressBar current={questionIndex + 1} total={questions.length} />
     </Layout>
   );

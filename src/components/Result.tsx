@@ -1,7 +1,9 @@
 import { MyCharacterResult } from "@services/models/MyCharacterResult";
 import { StatisticsResult } from "@services/models/StatisticsResult";
-import { media } from "@styles/size";
+import { media, size } from "@styles/size";
 import styled from "styled-components";
+import Image from "next/image";
+import { AutoHeightImageWrapper, BaseImageWrapper } from "./BaseImageWrapper";
 
 const Number = styled.h2<{
   mainColor: string;
@@ -12,15 +14,14 @@ const Number = styled.h2<{
   font-size: 80px;
   margin: 0;
   font-family: "Limelight";
-  text-shadow: -6px -1px 0 #000, 2px -1px 0 #000, -2px 2px 0 #000,
-    2px 2px 0 #000;
+  text-shadow: -6px -1px 0 #000, 2px -1px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   color: ${({ mainColor }) => mainColor};
 `;
 const ResultWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: ${size.content_padding}px;
   border: 3px solid black;
   position: relative;
 `;
@@ -52,12 +53,9 @@ const Name = styled.h1`
   margin: 0;
 `;
 
-const ResultImageWrapper = styled.div`
+const ResultImageWrapper = styled(AutoHeightImageWrapper)`
   width: 80%;
-  img {
-    object-fit: cover;
-    width: 100%;
-  }
+  z-index: -10;
 `;
 
 const Statistics = styled.div`
@@ -96,10 +94,11 @@ export const Result = ({ result, data }: Props) => {
         <Subname>{result.subname}</Subname>
         <Name>{result.name}</Name>
         <ResultImageWrapper>
-          <img
-            src={
-              "https://imgfiles-cdn.plaync.com/file/LoveBeat/download/20181024125815-4steztEhe2CVtxPq8tp50-v4"
-            }
+          <Image
+            src="https://imgfiles-cdn.plaync.com/file/LoveBeat/download/20181024125815-4steztEhe2CVtxPq8tp50-v4"
+            layout="fill"
+            objectFit="contain" 
+            alt={result.name}
           />
         </ResultImageWrapper>
         {data && (

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { NavbarHeight } from "./size";
+import { size } from "./size";
 
 export const GlobalStyle = createGlobalStyle`
     /* 만화영어 폰트는 'Limelight' */
@@ -36,10 +36,10 @@ export const GlobalStyle = createGlobalStyle`
     body {
         position: absolute;
         margin: auto !important;
-        max-width: 500px;
+        max-width: ${size.container_width}px;
         width: 100%;
         height: 100%;
-        max-height: 1080px;
+        max-height: ${size.container_height}px;
         overflow: hidden;
         display: flex;
     }
@@ -56,7 +56,7 @@ export const GlobalStyle = createGlobalStyle`
         border: 1px solid black;
         width: 100%;
         height: 100%;
-        padding-top: ${NavbarHeight}px;
+        padding-top: ${size.navbar_height}px;
         padding-bottom: 36px;
         overflow-x: hidden;
         overflow-y: scroll;
@@ -67,7 +67,7 @@ export const GlobalStyle = createGlobalStyle`
         border: 1px solid black;
         width: 100%;
         height: 100%;
-        padding: ${NavbarHeight}px 20px 36px 20px;
+        padding: ${size.navbar_height}px ${size.content_padding}px 36px ${size.content_padding}px;
         overflow-x: hidden;
         overflow-y: scroll;
         box-shadow: 10px 10px 0px black;

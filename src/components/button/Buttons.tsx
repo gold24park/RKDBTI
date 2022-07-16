@@ -1,5 +1,5 @@
 import { MyCharacterResult } from "@services/models/MyCharacterResult";
-import { media } from "@styles/size";
+import { media, size } from "@styles/size";
 import styled from "styled-components";
 
 export type Props = {
@@ -15,7 +15,7 @@ export const DefaultButton = styled.button`
     border: 3px solid black;
     font-family: 'ChosunBg', sans-serif;
     font-size: 18px;
-    height: 60px;
+    height: ${size.button_height}px;
     width: 100%;
     cursor: pointer;
 
@@ -48,9 +48,9 @@ export const SnsButton = styled(DefaultButton)<{
     background: ${({ backgroundColor }) => backgroundColor};
     color: ${({ fontColor }) => fontColor};
     margin-bottom: 10px;
-    img {
+    .imageWrapper {
         position: absolute;
-        width: 30px;
+        display: inline;
         left: 20px;
         top: 50%;
         transform: translateY(-50%);
@@ -64,8 +64,7 @@ export const SnsButton = styled(DefaultButton)<{
 export const PrimaryButton = styled(DefaultButton)`
     background: #444;
     color: white;
-    &:hover,
-    &:active {
+    &:hover {
         background: #2A7ED3;
         transition: ease 200ms;
         color: white;
@@ -74,8 +73,7 @@ export const PrimaryButton = styled(DefaultButton)`
 
 export const SecondaryButton = styled(DefaultButton)`
     background: transparent;
-    &:hover,
-    &:active {
+    &:hover {
         background: #2A7ED3;
         transition: ease 200ms;
         color: white;

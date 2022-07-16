@@ -1,8 +1,7 @@
 const customMediaQuery = (maxWidth: number): string => {
-  // 최대폭을 입력하면. 문자열을 밷는다!
   return `@media (max-width: ${maxWidth}px)`;
 };
-// 각 디바이스에 따라 최대폭 값을 변수화
+
 export const media = {
   custom: customMediaQuery,
   desktop: customMediaQuery(922),
@@ -10,5 +9,10 @@ export const media = {
   phone: customMediaQuery(576),
 };
 
-export const NavbarHeight = 60
-export const ContainerWidth = 500
+export const size = {
+  navbar_height: 60,
+  container_width: 500,
+  container_height: 1080,
+  content_padding: 20,
+  button_height: 60
+}

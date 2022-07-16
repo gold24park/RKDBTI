@@ -6,6 +6,7 @@ import { Layout } from "@components/Layout"
 import { Navbar } from "@components/Navbar"
 import { RelatedCharacter } from "@components/RelatedCharacter"
 import { Result } from "@components/Result"
+import { SystemHeading, SystemWrapper } from "@components/System"
 import { YoutubeAdvertisement } from "@components/YoutubeAdvertisement"
 import { DatabaseRequest, getDatabase } from "@middlewares/database"
 import { fetcher } from "@services/fetcher"
@@ -32,7 +33,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
     
     const { type } = query
     
-
     const db = (req as DatabaseRequest).db
 
     var result = null
@@ -72,12 +72,22 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
 
 
 function ResultPage({ result, url }: Props) {
+
     const { data, error } = useSWR<StatisticsResult>(`/api/statistics?typeNumber=${result?.unique_id}`, fetcher)
 
     if (result == null) {
         return (
             <Layout>
-                <h1>앗 찾을 수 없는 결과입니다</h1>
+                <SystemWrapper>
+                    <SystemHeading>?</SystemHeading>
+                    <p>
+                        겨..결과를 찾을 수 없어..!<br/>
+                        어찌된거지?!<br/>
+                        <Link href="/">
+                            <a>홈</a>
+                        </Link>으로 돌아가자.
+                    </p>
+                </SystemWrapper>
             </Layout>
         )
     }

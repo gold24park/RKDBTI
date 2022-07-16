@@ -54,9 +54,10 @@ handler.use(getSession).use(getDatabase)
       } else {
           parseInt(JSON.parse(req.body).typeNumber as string, 0)
       }
+
       let column = `type${typeNumber}`;
 
-      if (req.session != null) {
+      if (req.session != null && typeNumber > 0) {
         let cached: number[] = JSON.parse((await redis.get(req.session)) || "[]")
         if (!cached.includes(typeNumber)) {
           await req.db.statistics?.updateOne(

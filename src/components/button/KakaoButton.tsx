@@ -2,6 +2,7 @@ import { ResultConverter } from "@services/ResultConverter";
 import { logEvent } from "firebase/analytics";
 import { Props, SnsButton } from "./Buttons";
 import { theme } from "@styles/theme";
+import Image from "next/image";
 
 export const KakaoButton = ({ shareTitle, result }: Props) => {
   const handleOnClick = () => {
@@ -54,7 +55,9 @@ export const KakaoButton = ({ shareTitle, result }: Props) => {
       backgroundColor={theme.colors.kakao}
       fontColor={theme.colors.kakaoBlack}
     >
-      <img src="/images/kakao.png" />
+      <div className="imageWrapper">
+        <Image src="/images/kakao.png" width={30} height={30} alt="kakaotalk"/>
+      </div>
       카카오톡 공유하기
     </SnsButton>
   );

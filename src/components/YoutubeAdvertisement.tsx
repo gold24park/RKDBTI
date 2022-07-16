@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { SectionTitle } from "./SectionTitle";
 import Link from "next/link"
-import { media } from "@styles/size";
+import { media, size } from "@styles/size";
+import Image from "next/image";
 
 const Wrapper = styled.div`
     border: 3px solid black;
-    padding: 20px;
+    padding: ${size.content_padding}px;
 `
 
 const AdWrapper = styled.div`
@@ -54,7 +55,6 @@ const CircleImageWrapper = styled.div`
     img {
         border-radius: 50%;
         width: 90%;
-        object-fit: cover;
     }
     margin-bottom: 14px;
 `
@@ -77,7 +77,12 @@ export const YoutubeAdvertisement = ({ title, subtitle, youtubeUrl, twitchUrl }:
             <Link href={youtubeUrl}>
                 <Ad>
                     <CircleImageWrapper>
-                        <img src="https://via.placeholder.com/120x120.png"/>
+                        <Image
+                          src="https://via.placeholder.com/120x120.png" 
+                          width={120}
+                          height={120}
+                          alt="youtube railkim"
+                        />
                     </CircleImageWrapper>
                     {`잘 손질된 광기의 흔적`}
                     <b>유튜브 채널 바로가기</b>
@@ -86,7 +91,12 @@ export const YoutubeAdvertisement = ({ title, subtitle, youtubeUrl, twitchUrl }:
             <Link href={twitchUrl}>
                 <Ad>
                     <CircleImageWrapper>
-                        <img src="https://via.placeholder.com/120x120.png"/>
+                      <Image
+                          src="https://via.placeholder.com/120x120.png" 
+                          width={120}
+                          height={120}
+                          alt="youtube railkim"
+                      />
                     </CircleImageWrapper>
                     {`다정한 오타쿠 친구`}
                     <b>트위치 생방 월~목 5시</b>
