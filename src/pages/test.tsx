@@ -144,7 +144,6 @@ const TestPage: NextPage = () => {
           </AnswerButton>
         ))}
       </div>
-      <pre>{scores[10]}</pre>
       <ProgressBar current={questionIndex + 1} total={questions.length} />
     </Layout>
   );
