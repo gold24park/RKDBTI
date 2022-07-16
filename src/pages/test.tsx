@@ -56,7 +56,7 @@ const TestPage: NextPage = () => {
       // 마지막 답변을 했으므로 결과화면으로 이동합니다.
       setLoading(true);
       
-      let typeNumber = scores.indexOf(Math.max(...scores));
+      let typeNumber = scores.indexOf(Math.max(...scores)) + 1;
 
       if (typeNumber > 0) {
         await updateStatistics(typeNumber);
