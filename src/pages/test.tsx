@@ -149,6 +149,7 @@ const TestPage: NextPage = () => {
           src={`/images/question/${questionIndex + 1}.jpg`}
           layout="fill"
           objectFit="contain"
+          priority={true}
           alt={questions[questionIndex].q}
         />
       </TestIllustWrapper>
