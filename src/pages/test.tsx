@@ -36,7 +36,7 @@ const TestQuestion = styled.pre`
 
 const TestIllustWrapper = styled(BaseImageWrapper)`
   width: calc(100% - 40px);
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 9.07;
   border: 3px solid black;
   margin: auto;
   height: auto;
