@@ -11,7 +11,7 @@ export const media = {
 
 export const size = {
   navbar_height: 60,
-  container_width: 500,
+  container_width: 700,
   container_height: 1080,
   content_padding: 20,
   button_height: 60

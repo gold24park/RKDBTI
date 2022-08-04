@@ -146,9 +146,9 @@ const TestPage: NextPage = () => {
       <TestIllustWrapper>
         <Image
           className="image"
-          src="https://via.placeholder.com/1280x720.png"
+          src={`/images/question/${questionIndex + 1}.jpg`}
           layout="fill"
-          objectFit="cover"
+          objectFit="contain"
           alt={questions[questionIndex].q}
         />
       </TestIllustWrapper>

@@ -86,7 +86,9 @@ type Props = {
 export const RelatedCharacter = ({ isGood, result }: Props) => {
   let character = isGood ? result.good : result.bad;
   let ment = isGood ? result.goodment : result.badment;
-  return (
+  let image = character?.image || ""
+ 
+  return character && (
     <>
       <SectionTitle>{isGood ? `❤️ 좋은상성` : `☠️ 나쁜상성`}</SectionTitle>
       <RelatedCharacterWrapper>
@@ -99,9 +101,9 @@ export const RelatedCharacter = ({ isGood, result }: Props) => {
         </ContentWrapper>
         <ImageWrapper>
           <Image 
-            src={"https://via.placeholder.com/160x160.png"} 
-            width={160} height={160} 
-            alt={character?.name}
+            src={image} 
+            width={160} height={160} objectFit="contain"
+            alt={character.name}
           />
         </ImageWrapper>
       </RelatedCharacterWrapper>

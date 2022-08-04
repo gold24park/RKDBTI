@@ -95,7 +95,7 @@ export const Result = ({ result, data }: Props) => {
         <Name>{result.name}</Name>
         <ResultImageWrapper>
           <Image
-            src="https://imgfiles-cdn.plaync.com/file/LoveBeat/download/20181024125815-4steztEhe2CVtxPq8tp50-v4"
+            src={result.image}
             layout="fill"
             objectFit="contain" 
             alt={result.name}
