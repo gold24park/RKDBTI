@@ -17,6 +17,7 @@ export const AnswerButton = styled(DefaultButton)<{
 
     ${media.phone} {
         height: 50px;
+        font-size: 13px;
     }
 
     position: relative;
