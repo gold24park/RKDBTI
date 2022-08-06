@@ -97,9 +97,9 @@ const TestPage: NextPage = () => {
       setAnswers([...answers, answer]);
     } else {
       setLoading(true);
-      alert(scores);
+      
       let typeNumber = scores.indexOf(Math.max(...scores)) + 1;
-      alert(typeNumber);
+      
 
       if (typeNumber > 0) {
         await updateStatistics(typeNumber);
