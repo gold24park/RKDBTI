@@ -23,6 +23,7 @@ const Title = styled.h1`
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
     1px 1px 0 #fff;
   margin: 2rem 0 10px 0;
+  z-index: 1;
   ${media.phone} {
     font-size: 48px;
   }

@@ -29,7 +29,7 @@ const TestQuestion = styled.pre`
   white-space: break-spaces;
   margin: 0;
   ${media.phone} {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   background: ${(props) => props.theme.colors.text500};

@@ -16,7 +16,8 @@ export const AnswerButton = styled(DefaultButton)<{
     font-size: 15px;
 
     ${media.phone} {
-        height: 50px;
+        padding: 10px 50px;
+        height: auto;
         font-size: 13px;
     }
 
