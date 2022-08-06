@@ -23,7 +23,7 @@ export const KakaoButton = ({ shareTitle, result }: Props) => {
         title: shareTitle,
         description: result.name,
         imageUrl:
-          result.image ||
+          `https://rail-o-taku.space/images/character/${result.unique_id}.png` ||
           "https://avatars.githubusercontent.com/u/12989924?v=4",
         link: {
           mobileWebUrl: baseUrl,
