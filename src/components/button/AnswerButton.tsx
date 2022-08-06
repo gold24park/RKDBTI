@@ -9,13 +9,14 @@ export const AnswerButton = styled(DefaultButton)<{
     index: number,
 }>`
     padding: 10px;
-    height: 76px;
+    height: 60px;
     margin: 0 auto 10px auto;
     white-space: pre-wrap;
     line-height: 1.3;
+    font-size: 15px;
 
     ${media.phone} {
-        height: 60px;
+        height: 50px;
     }
 
     position: relative;

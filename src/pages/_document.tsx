@@ -8,6 +8,7 @@ import Document, {
   Head,
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import PageTransition from "@components/PageTransition";
 
 export default class MyDocument extends Document {
   static async getInitialProps(

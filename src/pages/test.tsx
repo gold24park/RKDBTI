@@ -1,12 +1,12 @@
 import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { AnswerButton } from "@components/button/AnswerButton";
 import { Layout } from "@components/Layout";
-import { TestDots, TestLoading } from "@components/LoadingLayout";
+import { TestLoading } from "@components/LoadingLayout";
 import { Navbar } from "@components/Navbar";
 import { ProgressBar } from "@components/ProgressBar";
 import questions from "@services/json/questions.json";
 import { ResultConverter } from "@services/ResultConverter";
-import { media } from "@styles/size";
+import { media, size } from "@styles/size";
 import { debounce } from "lodash";
 import { NextPage } from "next";
 import Image from "next/image";
@@ -21,35 +21,37 @@ enum Direction {
 
 const TestQuestion = styled.pre`
   font-family: "ChosunKm", serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
-  text-align: center;  
+  text-align: center;
   color: white;
   padding: 10px 20px;
   white-space: break-spaces;
   margin: 0;
   ${media.phone} {
-    font-size: 18px;
+    font-size: 16px;
   }
 
-  background: ${props => props.theme.colors.text500};
+  background: ${(props) => props.theme.colors.text500};
 `;
 
 const TestIllustWrapper = styled(BaseImageWrapper)`
   width: 100%;
   aspect-ratio: 16 / 9.07;
-  border: 3px solid black;
   margin: auto;
   height: auto;
-  background: ${props => props.theme.colors.text500};
+  padding: 0 ${size.content_padding}px;
+  background: ${(props) => props.theme.colors.text500};
   img {
     width: 100%;
     height: 100%;
     position: relative !important;
     object-fit: cover;
   }
+  & > span {
+    margin-top: ${size.content_padding}px !important;
+  }
 `;
-
 
 const AnswerWrapper = styled.div`
   padding: 0 20px;
@@ -89,14 +91,15 @@ const TestPage: NextPage = () => {
   };
 
   const handleClickAnswer = async (answer: number, typeScores: number[]) => {
-    if (questionIndex == questions.length - 1) {
-      const finalScores = scores.map(
-        (v, i) => v + typeScores[i] * Direction.NEXT
-      );
-      // 마지막 답변을 했으므로 결과화면으로 이동합니다.
-      setLoading(true);
+    updateQuestion(typeScores, Direction.NEXT);
 
-      let typeNumber = finalScores.indexOf(Math.max(...finalScores)) + 1;
+    if (questionIndex < questions.length - 1) {
+      setAnswers([...answers, answer]);
+    } else {
+      setLoading(true);
+      alert(scores);
+      let typeNumber = scores.indexOf(Math.max(...scores)) + 1;
+      alert(typeNumber);
 
       if (typeNumber > 0) {
         await updateStatistics(typeNumber);
@@ -109,10 +112,6 @@ const TestPage: NextPage = () => {
           type: ResultConverter.encode(typeNumber),
         },
       });
-    } else {
-      // 선택지를 기록하고, 다음 질문으로 이동
-      setAnswers([...answers, answer]);
-      updateQuestion(typeScores, Direction.NEXT);
     }
   };
 
@@ -134,7 +133,7 @@ const TestPage: NextPage = () => {
   if (loading) {
     return (
       <Layout>
-        <TestLoading/>
+        <TestLoading />
       </Layout>
     );
   }
@@ -142,8 +141,6 @@ const TestPage: NextPage = () => {
   return (
     <Layout wrapper="test_wrapper">
       <Navbar onClickBack={handleClickBack} />
-
-      <TestQuestion>{questions[questionIndex].q}</TestQuestion>
 
       <TestIllustWrapper>
         <Image
@@ -156,7 +153,9 @@ const TestPage: NextPage = () => {
         />
       </TestIllustWrapper>
 
-      <br/>
+      <TestQuestion>{questions[questionIndex].q}</TestQuestion>
+
+      <br />
 
       <AnswerWrapper>
         {questions[questionIndex].a.map(({ answer, type }, answerIndex) => (

@@ -37,9 +37,9 @@ export const GlobalStyle = createGlobalStyle`
     body {
         position: absolute;
         margin: auto !important;
-        max-width: ${size.container_width}px;
         width: 100%;
         height: 100%;
+        max-width: ${size.container_width}px;
         max-height: ${size.container_height}px;
         overflow: hidden;
         display: flex;
@@ -49,35 +49,40 @@ export const GlobalStyle = createGlobalStyle`
             max-height: ${size.tablet.container_height}px;
         }
     }
+    #__next {
+        width: 100%;
+        height: 100%;
+    }
+    #frame {
+        border: 1px solid black;
+        width: 100%;
+        height: 100%;
+        box-shadow: 10px 10px 0px black;
+    }
     #wrapper {
         position: absolute;
         border: 1px solid black;
         width: 100%;
         height: 100%;
         overflow: hidden;
-        box-shadow: 10px 10px 0px black;
     }
     #test_wrapper {
         position: absolute;
-        border: 1px solid black;
         width: 100%;
         height: 100%;
         padding-top: ${size.navbar_height}px;
-        padding-bottom: 36px;
+        padding-bottom: 56px;
         overflow-x: hidden;
         overflow-y: scroll;
-        box-shadow: 10px 10px 0px black;
         background: ${theme.colors.darkSurface};
     }
     #result_wrapper {
         position: absolute;
-        border: 1px solid black;
         width: 100%;
         height: 100%;
         padding: ${size.navbar_height}px ${size.content_padding}px 36px ${size.content_padding}px;
         overflow-x: hidden;
         overflow-y: scroll;
-        box-shadow: 10px 10px 0px black;
     }
     * {
         -moz-box-sizing: border-box;

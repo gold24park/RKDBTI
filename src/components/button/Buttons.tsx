@@ -13,11 +13,12 @@ export type Props = {
 export const DefaultButton = styled.button`
     display: inline-block;
     border: 3px solid ${props => props.theme.colors.text500};
-    font-family: 'ChosunBg', sans-serif;
+    font-family: 'ChosunGu', sans-serif;
     font-size: 18px;
     height: ${size.button_height}px;
     width: 100%;
     cursor: pointer;
+    font-weight: bold;
 
     ${media.phone} {
         font-size: 15px;
