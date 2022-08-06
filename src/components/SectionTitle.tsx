@@ -8,4 +8,5 @@ export const SectionTitle = styled.div`
   border-radius: 16px;
   display: inline-block;
   margin-bottom: 14px;
+  margin-top: 24px;
 `;

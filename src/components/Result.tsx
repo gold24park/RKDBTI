@@ -21,7 +21,6 @@ const ResultWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: ${size.content_padding}px;
   border: 3px solid black;
   position: relative;
 `;
@@ -95,7 +94,7 @@ export const Result = ({ result, data }: Props) => {
         <Name>{result.name}</Name>
         <ResultImageWrapper>
           <Image
-            src={result.image}
+            src={`/images/character/${result.unique_id}.png`}
             layout="fill"
             objectFit="contain" 
             alt={result.name}

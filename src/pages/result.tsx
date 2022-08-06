@@ -100,8 +100,8 @@ function ResultPage({ result, url }: Props) {
             <Navbar/>
             <Head>
                 <meta property="og:url" content={url || ""} />
-                <meta property="og:title" content={`내가 애니캐가 된다면 | ${result.name}`} />
-                <meta property="og:image" content={result.image} />
+                <meta property="og:title" content={`김래일의 애니캐 테스트 - 내가 애니캐가 된다면 | ${result.name}`} />
+                <meta property="og:image" content={`/images/facial/${result.unique_id}.png`} />
                 <meta property="og:description" content={result.description} />
             </Head>
             <Result result={result} data={data}/>

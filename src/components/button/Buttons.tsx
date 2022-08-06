@@ -12,7 +12,7 @@ export type Props = {
  */
 export const DefaultButton = styled.button`
     display: inline-block;
-    border: 3px solid black;
+    border: 3px solid ${props => props.theme.colors.text500};
     font-family: 'ChosunBg', sans-serif;
     font-size: 18px;
     height: ${size.button_height}px;
@@ -21,6 +21,7 @@ export const DefaultButton = styled.button`
 
     ${media.phone} {
         font-size: 15px;
+        height: ${size.mobile.button_height}px;
     }
 `
 
@@ -65,17 +66,17 @@ export const PrimaryButton = styled(DefaultButton)`
     background: #444;
     color: white;
     &:hover {
-        background: #2A7ED3;
+        background: ${props => props.theme.colors.primary};
         transition: ease 200ms;
-        color: white;
+        color: black;
     }
 `
 
 export const SecondaryButton = styled(DefaultButton)`
-    background: transparent;
+    background: white;
     &:hover {
-        background: #2A7ED3;
+        background: ${props => props.theme.colors.primary};
         transition: ease 200ms;
-        color: white;
+        color: black;
     }
 `

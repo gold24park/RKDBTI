@@ -6,7 +6,6 @@ export interface MyCharacterResult {
     name: string;
     subname: string;
     ment: string;
-    image: string;
     description: string;
     good?: Character;
     goodment?: string;

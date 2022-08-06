@@ -86,7 +86,7 @@ type Props = {
 export const RelatedCharacter = ({ isGood, result }: Props) => {
   let character = isGood ? result.good : result.bad;
   let ment = isGood ? result.goodment : result.badment;
-  let image = character?.image || ""
+  let image = `/images/facial/${character?.unique_id}.png`
   let name = character?.name || ""
  
   return (

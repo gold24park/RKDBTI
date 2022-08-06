@@ -29,15 +29,23 @@ const NavWrapper = styled.nav`
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  top: 1px;
+  top: 0px;
   width: calc(100% - 2px);
   max-width: ${size.container_width - 2}px;
   background: white;
   z-index: 1;
-  border-bottom: 1px solid #eee;
   
   @media (min-height: ${size.container_height}px) {
     top: calc(50% - ${size.container_height / 2}px + 2px);
+  }
+
+  ${media.tablet} {
+    top: calc(50% - ${size.tablet.container_height / 2}px + 2px);
+  }
+  
+  ${media.phone} {
+    height: ${size.mobile.navbar_height}px;
+    top: 1px;
   }
 `;
 

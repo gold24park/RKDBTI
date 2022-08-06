@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
-import { size } from "./size";
+import { media, size } from "./size";
+import { theme } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
     /* 만화영어 폰트는 'Limelight' */
@@ -43,6 +44,11 @@ export const GlobalStyle = createGlobalStyle`
         overflow: hidden;
         display: flex;
     }
+    ${media.tablet} {
+        body {
+            max-height: ${size.tablet.container_height}px;
+        }
+    }
     #wrapper {
         position: absolute;
         border: 1px solid black;
@@ -61,6 +67,7 @@ export const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
         overflow-y: scroll;
         box-shadow: 10px 10px 0px black;
+        background: ${theme.colors.darkSurface};
     }
     #result_wrapper {
         position: absolute;
@@ -92,5 +99,13 @@ export const GlobalStyle = createGlobalStyle`
 
     ::-webkit-scrollbar-track {
         background: white;
+    }
+    ${media.phone} {
+        #test_wrapper {
+            padding-top: ${size.mobile.navbar_height}px;
+        }
+        #result_wrapper {
+            padding: ${size.mobile.navbar_height}px ${size.content_padding}px 36px ${size.content_padding}px;
+        }
     }
 `;

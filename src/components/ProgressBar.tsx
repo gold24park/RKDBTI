@@ -1,4 +1,4 @@
-import { size } from "@styles/size";
+import { media, size } from "@styles/size";
 import styled from "styled-components";
 
 const ProgressBarWrapper = styled.div`
@@ -17,10 +17,14 @@ const ProgressBarWrapper = styled.div`
   background: white;
   border-top: 1px solid #eee;
   width: calc(100% - 2px);
-  max-width: calc(500px - 2px);
+  max-width: ${size.container_width - 2}px;
 
   @media (min-height: ${size.container_height}px) {
     bottom: calc(50% - ${size.container_height / 2}px + 1px);
+  }
+
+  ${media.tablet} {
+    bottom: calc(50% - ${size.tablet.container_height / 2}px + 2px);
   }
 `;
 

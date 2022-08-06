@@ -1,3 +1,4 @@
+import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { PrimaryButton, SecondaryButton } from "@components/button/Buttons";
 import { Copyright } from "@components/Copyright";
 import { Layout } from "@components/Layout";
@@ -35,6 +36,9 @@ const Counter = styled.div`
   position: absolute;
   border-radius: 10px;
   left 10px;
+  ${media.phone} {
+    font-size: 14px;
+  }
 `;
 
 const Skewed1 = styled.div`
@@ -67,19 +71,6 @@ const Skewed2 = styled(Skewed1)`
   -ms-transform: skew(0deg, -22deg);
   -o-transform: skew(0deg, -22deg);
   transform: skew(0deg, -22deg);
-`;
-
-const Skewed3 = styled(Skewed1)`
-  top: auto;
-  background: radial-gradient(#999 1px, transparent 1px);
-  background-size: 8px 8px;
-  padding: 900px 0;
-  -webkit-transform: skew(0deg, 10deg);
-  -moz-transform: skew(0deg, 10deg);
-  -ms-transform: skew(0deg, 10deg);
-  -o-transform: skew(0deg, 10deg);
-  transform: skew(0deg, 10deg);
-  bottom: 120px;
 `;
 
 const Badge = styled.div`
@@ -123,20 +114,42 @@ const RailComicsOne = styled.h2`
   bottom: 80px;
   right: ${size.content_padding}px;
   ${media.phone} {
-    font-size: 108px;
+    font-size: 98px;
+    bottom: 50px;
   }
 `;
 
 const StartButtonWrapper = styled.div`
   position: absolute;
-  bottom: calc(60px + ${size.button_height}px + 10px);
+  bottom: calc(40px + ${size.button_height}px + 10px);
   width: calc(100% - ${size.content_padding * 2}px) !important;
+  ${media.phone} {
+    bottom: calc(40px + ${size.mobile.button_height}px + 10px);
+  }
 `
 
 const ShareButtonWrapper = styled.div`
   position: absolute;
-  bottom: 60px;
+  bottom: 40px;
   width: calc(100% - ${size.content_padding * 2}px) !important;
+`
+
+const MainImageWrapper = styled(BaseImageWrapper)`
+  position: absolute;
+  width: 700px;
+  right: -100px;
+  bottom: -100px;
+  filter: grayscale(70%);
+  transform: rotate(-10deg);
+  &:hover {
+    filter: grayscale(0%);
+    transition: ease 0.3s;
+  }
+  ${media.phone} {
+    width: 470px;
+    right: -80px;
+    bottom: -120px;
+  }
 `
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {  
@@ -192,7 +205,6 @@ const Home: NextPage = ({ totalCount }: InferGetServerSidePropsType<typeof getSe
   return (
     <Layout>
       <div style={{ padding: "20px" }}>
-        <Skewed3 />
         <Skewed2 />
         <Skewed1 />
         <Link href="https://www.youtube.com/watch?v=2xmxOPCFEqE">
@@ -218,6 +230,14 @@ const Home: NextPage = ({ totalCount }: InferGetServerSidePropsType<typeof getSe
 
         <br />
 
+        <MainImageWrapper>
+          <Image
+            src={`/images/character/15.png`}
+            layout="fill"
+            objectFit="contain" 
+            alt={'김래일의 애니캐 테스트'}
+          />
+        </MainImageWrapper>
         <RailComicsHeading>RAIL COMICS</RailComicsHeading>
         <RailComicsOne>1</RailComicsOne>
 

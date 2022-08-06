@@ -1,4 +1,4 @@
-import { media } from '@styles/size'
+import { media, size } from '@styles/size'
 import styled from 'styled-components'
 import { DefaultButton } from './Buttons'
 
@@ -7,7 +7,6 @@ import { DefaultButton } from './Buttons'
  */
 export const AnswerButton = styled(DefaultButton)<{
     index: number,
-    fontColor?: string
 }>`
     padding: 10px;
     height: 76px;
@@ -19,7 +18,27 @@ export const AnswerButton = styled(DefaultButton)<{
         height: 60px;
     }
 
-    background: white;
+    position: relative;
+
+    
+    ${({ theme, index }) => `
+        background: ${theme.colors.surface};
+        color: ${theme.colors.text500};
+
+        &::before {
+            content: '${index + 1}';
+            background: ${theme.colors.text400};
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: ${size.content_padding}px;
+            width: 20px;
+            height: 20px;
+            color: white;
+            font-size: 16px;
+            border-radius: 20px;
+        }
+    `}
 
     ${({ index }) => index == 0 && `
         &:hover {
@@ -55,11 +74,5 @@ export const AnswerButton = styled(DefaultButton)<{
             background-size: 2px 2px;
         }
     `}
-    
-    color: ${({ theme, fontColor }) => (
-        !fontColor ? theme.colors.text500 : theme.colors[fontColor]
-    )};
-
-    
     
 `
