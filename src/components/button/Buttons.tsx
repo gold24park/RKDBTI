@@ -69,7 +69,7 @@ export const PrimaryButton = styled(DefaultButton)`
     &:hover {
         background: ${props => props.theme.colors.primary};
         transition: ease 200ms;
-        color: black;
+        color: white;
     }
 `
 
@@ -78,6 +78,6 @@ export const SecondaryButton = styled(DefaultButton)`
     &:hover {
         background: ${props => props.theme.colors.primary};
         transition: ease 200ms;
-        color: black;
+        color: white;
     }
 `

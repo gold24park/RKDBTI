@@ -23,6 +23,9 @@ const ResultWrapper = styled.div`
   align-items: center;
   border: 3px solid black;
   position: relative;
+  background-image:  repeating-linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #ccc), repeating-linear-gradient(45deg, #eee 25%, #ffffff 25%, #ffffff 75%, #eee 75%, #eee);
+  background-position: 0 0, 1px 1px;
+  background-size: 2px 2px;
 `;
 
 const Ment = styled.div`
@@ -54,7 +57,7 @@ const Name = styled.h1`
 
 const ResultImageWrapper = styled(AutoHeightImageWrapper)`
   width: 80%;
-  z-index: -10;
+  z-index: 0;
 `;
 
 const Statistics = styled.div`

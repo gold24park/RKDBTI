@@ -1,57 +1,23 @@
-import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { AnswerButton } from "@components/button/AnswerButton";
 import { Layout } from "@components/Layout";
 import { TestLoading } from "@components/LoadingLayout";
 import { Navbar } from "@components/Navbar";
 import { ProgressBar } from "@components/ProgressBar";
+import { Animations } from "@services/animations";
 import questions from "@services/json/questions.json";
 import { ResultConverter } from "@services/ResultConverter";
-import { media, size } from "@styles/size";
+import { AnimatePresence, motion } from "framer-motion";
 import { debounce } from "lodash";
 import { NextPage } from "next";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Question } from "@components/Question";
 
 enum Direction {
   NEXT = 1,
   PREV = -1,
 }
-
-const TestQuestion = styled.pre`
-  font-family: "ChosunKm", serif;
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-  color: white;
-  padding: 10px 20px;
-  white-space: break-spaces;
-  margin: 0;
-  ${media.phone} {
-    font-size: 15px;
-  }
-
-  background: ${(props) => props.theme.colors.text500};
-`;
-
-const TestIllustWrapper = styled(BaseImageWrapper)`
-  width: 100%;
-  aspect-ratio: 16 / 9.07;
-  margin: auto;
-  height: auto;
-  padding: 0 ${size.content_padding}px;
-  background: ${(props) => props.theme.colors.text500};
-  img {
-    width: 100%;
-    height: 100%;
-    position: relative !important;
-    object-fit: cover;
-  }
-  & > span {
-    margin-top: ${size.content_padding}px !important;
-  }
-`;
 
 const AnswerWrapper = styled.div`
   padding: 0 20px;
@@ -97,9 +63,8 @@ const TestPage: NextPage = () => {
       setAnswers([...answers, answer]);
     } else {
       setLoading(true);
-      
+
       let typeNumber = scores.indexOf(Math.max(...scores)) + 1;
-      
 
       if (typeNumber > 0) {
         await updateStatistics(typeNumber);
@@ -141,35 +106,40 @@ const TestPage: NextPage = () => {
   return (
     <Layout wrapper="test_wrapper">
       <Navbar onClickBack={handleClickBack} />
-
-      <TestIllustWrapper>
-        <Image
-          className="image"
-          src={`/images/question/${questionIndex + 1}.jpg`}
-          layout="fill"
-          objectFit="contain"
-          priority={true}
-          alt={questions[questionIndex].q}
+        
+      <AnimatePresence>
+        <Question
+          key="question"
+          question={questions[questionIndex].q}
+          questionIndex={questionIndex}
         />
-      </TestIllustWrapper>
+        <br />
+        <motion.div          
+          key={questionIndex}
+          variants={Animations.list.variants}
+          initial="hidden"
+          animate="visible"
+        >
+          <AnswerWrapper>
+            {questions[questionIndex].a.map(({ answer, type }, answerIndex) => (
+              <motion.div
+                key={`Answer-${questionIndex}-${answerIndex}`}
+                variants={Animations.listItem.variants}
+              >
+                <AnswerButton
+                  index={answerIndex}
+                  onClick={debounce(async () => {
+                    await handleClickAnswer(answerIndex, type);
+                  }, 50)}
+                >
+                  {answer}
+                </AnswerButton>
+              </motion.div>
+            ))}
+          </AnswerWrapper>
+        </motion.div>
+      </AnimatePresence>
 
-      <TestQuestion>{questions[questionIndex].q}</TestQuestion>
-
-      <br />
-
-      <AnswerWrapper>
-        {questions[questionIndex].a.map(({ answer, type }, answerIndex) => (
-          <AnswerButton
-            index={answerIndex}
-            key={`answer_${answerIndex}`}
-            onClick={debounce(async () => {
-              await handleClickAnswer(answerIndex, type);
-            }, 50)}
-          >
-            {answer}
-          </AnswerButton>
-        ))}
-      </AnswerWrapper>
       <ProgressBar current={questionIndex + 1} total={questions.length} />
     </Layout>
   );

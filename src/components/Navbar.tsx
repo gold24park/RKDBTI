@@ -34,9 +34,15 @@ const NavWrapper = styled.nav`
   max-width: ${size.container_width - 2}px;
   background: white;
   z-index: 1;
+  cursor: pointer;
+  
+  &:hover {
+    filter: grayscale(100%);
+    transition: 0.3s;
+  }
   
   @media (min-height: ${size.container_height}px) {
-    top: calc(50% - ${size.container_height / 2}px + 2px);
+    top: calc(50% - ${size.container_height / 2}px + 1px);
   }
 
   ${media.tablet} {

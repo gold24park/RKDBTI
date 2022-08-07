@@ -49,29 +49,21 @@ const Skewed1 = styled.div`
   right: 0;
   background: repeating-linear-gradient(
     55deg,
-    #888,
-    #888 3px,
-    #555 3px,
-    #555 5px
+    #666,
+    #666 3px,
+    #4a4a4a 3px,
+    #4a4a4a 5px
   );
-  padding: 200px 0;
+  padding: 400px 0;
   -webkit-transform: skew(0deg, -10deg);
   -moz-transform: skew(0deg, -10deg);
   -ms-transform: skew(0deg, -10deg);
   -o-transform: skew(0deg, -10deg);
   transform: skew(0deg, -10deg);
   margin-top: -200px;
-`;
-
-const Skewed2 = styled(Skewed1)`
-  top: 120px;
-  background: rgba(0, 0, 0, 0.15);
-  padding: 200px 0;
-  -webkit-transform: skew(0deg, -22deg);
-  -moz-transform: skew(0deg, -22deg);
-  -ms-transform: skew(0deg, -22deg);
-  -o-transform: skew(0deg, -22deg);
-  transform: skew(0deg, -22deg);
+  ${media.phone} {
+    padding: 45vh 0;
+  }
 `;
 
 const Badge = styled.div`
@@ -141,10 +133,21 @@ const MainImageWrapper = styled(BaseImageWrapper)`
   right: -100px;
   bottom: -100px;
   filter: grayscale(70%);
-  transform: rotate(-10deg);
+  animation: float 6s ease-in-out infinite;
   &:hover {
     filter: grayscale(0%);
     transition: ease 0.3s;
+  }
+  @keyframes float {
+    0% {
+      transform: rotate(-10deg) translatey(0px);
+    }
+    50% {
+      transform: rotate(-8deg) translatey(-14px);
+    }
+    100% {
+      transform: rotate(-10deg) translatey(0px);
+    }
   }
   ${media.phone} {
     width: 470px;
@@ -192,7 +195,7 @@ const Home: NextPage = ({ totalCount }: InferGetServerSidePropsType<typeof getSe
     if (navigator.share) {
       navigator
         .share({
-          title: "내가 애니캐가 된다면",
+          title: "김래일의 애니캐릭터테스트 - 애니 캐릭터가 되어버린 나...",
           url: location.href,
         })
         .then(() => {})
@@ -206,7 +209,6 @@ const Home: NextPage = ({ totalCount }: InferGetServerSidePropsType<typeof getSe
   return (
     <Layout>
       <div style={{ padding: "20px" }}>
-        <Skewed2 />
         <Skewed1 />
         <Link href="https://www.youtube.com/watch?v=2xmxOPCFEqE">
           <Badge>
@@ -216,7 +218,7 @@ const Home: NextPage = ({ totalCount }: InferGetServerSidePropsType<typeof getSe
               width={20}
               alt="김래일 유튜브"
             />
-            김래일의 애니캐 심리테스트
+            김래일의 애니캐 테스트
           </Badge>
         </Link>
         <Title>

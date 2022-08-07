@@ -29,8 +29,10 @@ const ProgressBarWrapper = styled.div`
 `;
 
 const ProgressBackground = styled.div`
-  height: 5px;
-  background: #eee;
+  height: 6px;
+  background-image:  repeating-linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), repeating-linear-gradient(45deg, #ccc 25%, #ffffff 25%, #ffffff 75%, #ccc 75%, #ccc);
+  background-position: 0 0, 1px 1px;
+  background-size: 2px 2px;
   border: 1px solid black;
   flex: 1;
   margin-right: 10px;
@@ -38,7 +40,7 @@ const ProgressBackground = styled.div`
 
 const ProgressForeground = styled.div`
   height: 100%;
-  background: #222;
+  background: ${props => props.theme.colors.text500};
 `;
 
 type Props = {
