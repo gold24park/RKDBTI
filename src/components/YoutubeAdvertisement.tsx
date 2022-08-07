@@ -5,8 +5,12 @@ import { media, size } from "@styles/size";
 import Image from "next/image";
 
 const Wrapper = styled.div`
-    border: 3px solid black;
+    border: 1px solid black;
+    box-shadow: 0px 10px 0px #eee;
     padding: ${size.content_padding}px;
+    background-image:  repeating-linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #ccc), repeating-linear-gradient(45deg, #eee 25%, #ffffff 25%, #ffffff 75%, #eee 75%, #eee);
+    background-position: 0 0, 1px 1px;
+    background-size: 2px 2px;
 `
 
 const AdWrapper = styled.div`
@@ -77,16 +81,17 @@ const Credit = styled.ul`
 `
 
 type Props = {
+  style: React.CSSProperties;
   subtitle: string;
   title: string;
   youtubeUrl: string;
   twitchUrl: string;
 };
 
-export const YoutubeAdvertisement = ({ title, subtitle, youtubeUrl, twitchUrl }: Props) => {
+export const YoutubeAdvertisement = ({ style, title, subtitle, youtubeUrl, twitchUrl }: Props) => {
   return (
-    <>
-      <SectionTitle>{`🙄 만든이`}</SectionTitle>
+    <div style={style}>
+      <SectionTitle>{`🙄 이렇게 만들었어요!`}</SectionTitle>
       <Wrapper>
         <SubTitle>{subtitle}</SubTitle>
         <Title>{title}</Title>
@@ -128,6 +133,6 @@ export const YoutubeAdvertisement = ({ title, subtitle, youtubeUrl, twitchUrl }:
         <li><b>아트</b> 차라리라차‧파란 외계인</li>
         <li><b>개발</b> 선홍‧쪼오리‧파이리<br/></li>
       </Credit>
-    </>
+    </div>
   );
 };

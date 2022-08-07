@@ -3,8 +3,9 @@ import { media, size } from "@styles/size";
 import styled from "styled-components";
 
 export type Props = {
-    shareTitle: string
-    result: MyCharacterResult
+    style?: React.CSSProperties;
+    shareTitle: string;
+    result: MyCharacterResult;
 }
 
 /**

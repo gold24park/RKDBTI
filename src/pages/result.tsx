@@ -1,4 +1,4 @@
-import { TextButton } from "@components/button/Buttons"
+import { SecondaryButton, TextButton } from "@components/button/Buttons"
 import { KakaoButton } from "@components/button/KakaoButton"
 import { TwitterButton } from "@components/button/TwitterButton"
 import { Copyright } from "@components/Copyright"
@@ -109,17 +109,18 @@ function ResultPage({ result, url }: Props) {
             <RelatedCharacter isGood={true} result={result}/>
             <br />
             <RelatedCharacter isGood={false} result={result}/>
-            <br />
-            <br />
-            <TwitterButton shareTitle={twitterShareTitle} result={result} />
+            
+            <TwitterButton 
+                style={{ marginTop: "60px" }}
+                shareTitle={twitterShareTitle} 
+                result={result} />
             <br />
             <KakaoButton shareTitle={kakaoShareTitle} result={result} />
             <Link href="/">
-                <TextButton>처음으로</TextButton>
+                <SecondaryButton>다시하기</SecondaryButton>
             </Link>
-            <br />
-            <br />
             <YoutubeAdvertisement 
+                style={{ marginTop: "40px" }}
                 subtitle="2D전문 인류학자"
                 title="김래일"
                 youtubeUrl="https://www.youtube.com/c/%EA%B9%80%EB%9E%98%EC%9D%BC"

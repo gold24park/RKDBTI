@@ -5,7 +5,7 @@ import { Props, SnsButton } from "./Buttons";
 import Image from "next/image";
 import { BaseImageWrapper } from "@components/BaseImageWrapper";
 
-export const TwitterButton = ({ shareTitle, result }: Props) => {
+export const TwitterButton = ({ style, shareTitle, result }: Props) => {
   const handleOnClick = () => {
     logEvent(window.FirebaseAnalytics, "share_twitter", {
       url: location.href,
@@ -25,6 +25,7 @@ export const TwitterButton = ({ shareTitle, result }: Props) => {
 
   return (
     <SnsButton
+      style={style}
       onClick={handleOnClick}
       backgroundColor={theme.colors.twitter}
       fontColor={"white"}
