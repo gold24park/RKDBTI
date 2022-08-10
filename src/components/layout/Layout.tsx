@@ -10,7 +10,7 @@ type Props = {
 export const Layout = (props: Props) => (
   <>
     <Head>
-      <title>RKDBTI</title>
+      <title>김래일의 애니캐 테스트</title>
       <meta name="description" content="RKDBTI description here." />
       <link rel="icon" href="/favicon.ico" />
       <link rel="preconnect" href="https://fonts.googleapis.com"></link>

@@ -53,7 +53,7 @@ export const CommentInput = ({ unique_id, character_name, color, requestNewPage 
     setNickname(event.target.value.trim())
   };
   const handleOnTextChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value.trim())
+    setText(event.target.value)
   };
 
   const handleOnClickPost = (nickname: string, text: string) => {
