@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { ReactNode } from "react";
-import PageTransition from "./PageTransition";
+import PageTransition from "../PageTransition";
 
 type Props = {
     wrapper?: string

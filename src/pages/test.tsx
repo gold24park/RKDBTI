@@ -1,8 +1,8 @@
 import { AnswerButton } from "@components/button/AnswerButton";
-import { Layout } from "@components/Layout";
-import { TestLoading } from "@components/LoadingLayout";
+import { Layout } from "@components/layout/Layout";
+import { TestLoading } from "@components/test/LoadingLayout";
 import { Navbar } from "@components/Navbar";
-import { ProgressBar } from "@components/ProgressBar";
+import { ProgressBar } from "@components/test/ProgressBar";
 import { Animations } from "@services/animations";
 import questions from "@services/json/questions.json";
 import { ResultConverter } from "@services/ResultConverter";
@@ -12,7 +12,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Question } from "@components/Question";
+import { Question } from "@components/test/Question";
 
 enum Direction {
   NEXT = 1,
@@ -71,10 +71,12 @@ const TestPage: NextPage = () => {
         await new Promise((r) => setTimeout(r, 500));
       }
 
+      // t: 직접 테스트함을 표시
       router.push({
         pathname: "/result",
         query: {
           type: ResultConverter.encode(typeNumber),
+          t: 1
         },
       });
     }

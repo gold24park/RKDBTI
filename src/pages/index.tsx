@@ -1,7 +1,7 @@
 import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { PrimaryButton, SecondaryButton } from "@components/button/Buttons";
 import { Copyright } from "@components/Copyright";
-import { Layout } from "@components/Layout";
+import { Layout } from "@components/layout/Layout";
 import { logEvent } from "@firebase/analytics";
 import { DatabaseRequest, getDatabase } from "@middlewares/database";
 import { media, size } from "@styles/size";
@@ -195,7 +195,7 @@ const Home: NextPage = ({ totalCount }: InferGetServerSidePropsType<typeof getSe
     if (navigator.share) {
       navigator
         .share({
-          title: "김래일의 애니캐릭터테스트 - 애니 캐릭터가 되어버린 나...",
+          title: "김래일의 애니캐 테스트 - 내가 애니캐가 된다면",
           url: location.href,
         })
         .then(() => {})
@@ -222,13 +222,13 @@ const Home: NextPage = ({ totalCount }: InferGetServerSidePropsType<typeof getSe
           </Badge>
         </Link>
         <Title>
-          애니
+          내가
+          <br />
+          애니메이션
           <br />
           캐릭터가
           <br />
-          되어버린
-          <br />
-          나...
+          된다면...?
         </Title>
 
         <br />

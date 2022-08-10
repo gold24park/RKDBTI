@@ -42,7 +42,7 @@ const NavWrapper = styled.nav`
   }
   
   @media (min-height: ${size.container_height}px) {
-    top: calc(50% - ${size.container_height / 2}px + 1px);
+    top: calc(50% - ${size.container_height / 2}px + 2px);
   }
 
   ${media.tablet} {

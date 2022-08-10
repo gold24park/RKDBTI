@@ -2,8 +2,8 @@ import { MyCharacterResult } from "@services/models/MyCharacterResult";
 import { media } from "@styles/size";
 import styled from "styled-components";
 import Image from "next/image";
-import { SectionTitle } from "./SectionTitle";
-import { BaseImageWrapper } from "./BaseImageWrapper";
+import { SectionTitle } from "@components/SectionTitle";
+import { BaseImageWrapper } from "@components/BaseImageWrapper";
 
 const RelatedCharacterWrapper = styled.div`
   display: flex;

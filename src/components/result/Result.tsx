@@ -3,7 +3,7 @@ import { StatisticsResult } from "@services/models/StatisticsResult";
 import { media, size } from "@styles/size";
 import styled from "styled-components";
 import Image from "next/image";
-import { AutoHeightImageWrapper, BaseImageWrapper } from "./BaseImageWrapper";
+import { AutoHeightImageWrapper, BaseImageWrapper } from "../BaseImageWrapper";
 
 const Number = styled.h2<{
   mainColor: string;

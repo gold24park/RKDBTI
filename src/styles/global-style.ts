@@ -113,4 +113,61 @@ export const GlobalStyle = createGlobalStyle`
             padding: ${size.mobile.navbar_height}px ${size.content_padding}px 36px ${size.content_padding}px;
         }
     }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        font-family: 'ChosunBg', sans-serif;
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      
+      ul.pagination li {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+      }
+    
+      ul.pagination li:first-child{
+        border-radius: 5px 0 0 5px;
+      }
+    
+      ul.pagination li:last-child{
+        border-radius: 0 5px 5px 0;
+      }
+      
+      ul.pagination li a {
+        text-decoration: none;
+        color: ${theme.colors.text500};
+        font-size: 1rem;
+      }
+      
+      ul.pagination li.active a {
+        color: ${theme.colors.primary};
+      }
+    
+      ul.pagination li.active {
+        border-radius: 16px;
+        border: 2px solid ${theme.colors.primary};
+      }
+      
+      ul.pagination li a:hover,
+      ul.pagination li a.active {
+        color: ${theme.colors.primary};
+        
+      }
+      
+      .page-selection {
+        width: 48px;
+        height: 30px;
+        color: #337ab7;
+      }
 `;

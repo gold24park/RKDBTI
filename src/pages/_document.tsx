@@ -8,6 +8,7 @@ import Document, {
   Head,
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import { v4 } from "uuid";
 import PageTransition from "@components/PageTransition";
 
 export default class MyDocument extends Document {

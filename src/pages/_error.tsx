@@ -1,4 +1,4 @@
-import { Layout } from "@components/Layout";
+import { Layout } from "@components/layout/Layout";
 import { SystemHeading, SystemWrapper } from "@components/System";
 import Link from "next/link";
 import { NextPage } from "next/types";

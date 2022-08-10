@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SectionTitle } from "./SectionTitle";
+import { SectionTitle } from "../SectionTitle";
 import Link from "next/link"
 import { media, size } from "@styles/size";
 import Image from "next/image";

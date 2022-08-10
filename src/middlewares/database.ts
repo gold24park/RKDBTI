@@ -7,11 +7,11 @@ interface Database {
   client?: mongo.MongoClient;
   characters?: mongo.Collection;
   statistics?: mongo.Collection;
+  comments?: mongo.Collection;
 }
 
 export interface DatabaseRequest extends AppApiRequest {
   db: Database;
-  session?: string;
 }
 
 const connectDB = (async function () {
@@ -23,11 +23,13 @@ const connectDB = (async function () {
   const database: mongo.Db = client.db(process.env.MONGO_DATABASE);
   const characters = database.collection("characters");
   const statistics = database.collection("statistics");
+  const comments = database.collection("comments");
   await createIndexes(database);
   return {
     client,
     characters,
     statistics,
+    comments
   };
 })();
 
