@@ -29,6 +29,7 @@ MONGO_DATABASE="mychar_db"
 
 REDIS_URI=redis://redis:6379
 
+NEXT_PUBLIC_URL="https://rail-o-taku.space"
 NEXT_PUBLIC_KAKAO_API_KEY="yourkakaoapikey"
 NEXT_PUBLIC_FIREBASE_API_KEY="fbapikey"
 NEXT_PUBLIC_FIREBASE_APP_ID="fbappid"
