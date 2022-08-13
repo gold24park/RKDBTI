@@ -14,7 +14,7 @@ export const KakaoButton = ({ shareTitle, shareUrl, shareImage, result }: Props)
     const description = `<${result.name}> "${result.ment}"`
 
     window.Kakao.Link.sendCustom({
-      templateId: "81347",
+      templateId: 81347,
       templateArgs: {
         "TITLE": shareTitle,
         "DESC": description,
