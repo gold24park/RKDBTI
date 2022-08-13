@@ -16,10 +16,10 @@ export const KakaoButton = ({ shareTitle, shareUrl, shareImage, result }: Props)
     window.Kakao.Link.sendCustom({
       templateId: "81347",
       templateArgs: {
-        TITLE: shareTitle,
-        DESC: description,
-        THU: shareImage,
-        RESULT_PATH: shareUrl.replace(`${process.env.NEXT_PUBLIC_URL}/`, "")
+        "TITLE": shareTitle,
+        "DESC": description,
+        "THU": shareImage,
+        "RESULT_PATH": shareUrl.replace(`${process.env.NEXT_PUBLIC_URL}/`, "")
       },
     });
   };
