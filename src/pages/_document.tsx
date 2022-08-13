@@ -44,8 +44,7 @@ export default class MyDocument extends Document {
             href="/fonts/fonts.css"
           />
           <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"></link>
-      <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet"></link>
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"></link>
         </Head>
         <body>
           <Main />
