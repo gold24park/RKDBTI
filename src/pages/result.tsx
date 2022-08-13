@@ -165,7 +165,7 @@ function ResultPage({ result }: Props) {
         <meta property="og:image" content={shareImage} />
         <meta property="og:description" content={description} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:card" content={shareImage} />
+        <meta name="twitter:image:src" content={shareImage} />
         <meta name="twitter:site" content={shareUrl} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />

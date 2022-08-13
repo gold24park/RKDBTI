@@ -13,33 +13,14 @@ export const KakaoButton = ({ shareTitle, shareUrl, shareImage, result }: Props)
 
     const description = `<${result.name}> "${result.ment}"`
 
-    window.Kakao.Link.sendDefault({
-      objectType: "feed",
-      content: {
-        title: shareTitle,
-        description: description,
-        imageUrl: shareImage,
-        link: {
-          mobileWebUrl: shareUrl,
-          webUrl: shareUrl,
-        },
+    window.Kakao.Link.sendCustom({
+      templateId: "81347",
+      templateArgs: {
+        TITLE: shareTitle,
+        DESC: description,
+        THU: shareImage,
+        RESULT_PATH: shareUrl.replace(`${process.env.NEXT_PUBLIC_URL}/`, "")
       },
-      buttons: [
-        {
-          title: "결과 확인하기",
-          link: {
-            mobileWebUrl: shareUrl,
-            webUrl: shareUrl,
-          },
-        },
-        {
-          title: "나도 해보기",
-          link: {
-            mobileWebUrl: process.env.NEXT_PUBLIC_URL,
-            webUrl: process.env.NEXT_PUBLIC_URL,
-          },
-        },
-      ],
     });
   };
 
