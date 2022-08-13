@@ -12,10 +12,7 @@ export const Layout = (props: Props) => (
     <Head>
       <title>김래일의 애니캐 테스트</title>
       <meta name="description" content="김래일의 애니캐 테스트! 내가 만약 애니메이션 캐릭터가 된다면 어떤 모습일까?" />
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"></link>
-      <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet"></link>
+      <link rel="icon" href="/images/favicon.ico" />
     </Head>
     <PageTransition>
       <div id="frame">
