@@ -138,7 +138,7 @@ function ResultPage({ result, url }: Props) {
         />
         <meta
           property="og:image"
-          content={`/images/facial/${result.unique_id}.png`}
+          content={`${url}/images/facial/${result.unique_id}.png`}
         />
         <meta property="og:description" content={result.description} />
       </Head>

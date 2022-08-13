@@ -45,6 +45,8 @@ export default class MyDocument extends Document {
           />
           <link rel="preconnect" href="https://fonts.googleapis.com"></link>
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"></link>
+          <meta name="color-scheme" content="light"></meta>
+          <meta name="supported-color-schemes" content="light"></meta>
         </Head>
         <body>
           <Main />
