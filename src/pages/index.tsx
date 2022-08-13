@@ -18,6 +18,7 @@ const Title = styled.h1`
   font-size: 66px;
   position: relative;
   font-weight: 500;
+  font-display: swap;
   top: ${size.content_padding}px;
   left: 10px;
   color: black;
