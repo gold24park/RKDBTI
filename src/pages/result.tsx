@@ -130,7 +130,7 @@ function ResultPage({ result }: Props) {
   const defaultTitle = "김래일의 애니캐 테스트 - 내가 애니캐가 된다면";
   const twitterShareTitle = `${defaultTitle}\n${result.name}(이)랄까?`;
 
-  const shareImage = `${process.env.NEXT_PUBLIC_URL}/share/${result.unique_id}.png`;
+  const shareImage = `${process.env.NEXT_PUBLIC_URL}/images/share/${result.unique_id}.png`;
   const shareUrl = `${
     process.env.NEXT_PUBLIC_URL
   }/result?type=${ResultConverter.encode(result.unique_id)}`;
