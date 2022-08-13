@@ -24,7 +24,7 @@ function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Script
-        src="https://developers.kakao.com/sdk/js/kakao.js"
+        src="https://developers.kakao.com/sdk/js/kakao.min.js"
         onLoad={() => {
           window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
         }}
