@@ -131,6 +131,7 @@ function ResultPage({ result }: Props) {
   const twitterShareTitle = `${defaultTitle}\n${result.name}(이)랄까?`;
 
   const shareImage = `${process.env.NEXT_PUBLIC_URL}/images/share/${result.unique_id}.png`;
+  const shareKakaoImage = `${process.env.NEXT_PUBLIC_URL}/images/colored/${result.unique_id}.png`;
   const shareUrl = `${
     process.env.NEXT_PUBLIC_URL
   }/result?type=${ResultConverter.encode(result.unique_id)}`;
@@ -196,7 +197,7 @@ function ResultPage({ result }: Props) {
       <KakaoButton
         shareTitle={defaultTitle}
         result={result}
-        shareImage={shareImage}
+        shareImage={shareKakaoImage}
         shareUrl={shareUrl}
       />
       <SnsButton

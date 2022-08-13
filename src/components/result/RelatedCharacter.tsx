@@ -73,8 +73,11 @@ const ContentWrapper = styled.div`
 
 const ImageWrapper = styled(BaseImageWrapper)`
   width: 160px;
+  height: 160px;
+  border: 1px solid black;
   ${media.phone} {
     width: 120px;
+    height: 120px;
   }
 `;
 
@@ -86,7 +89,7 @@ type Props = {
 export const RelatedCharacter = ({ isGood, result }: Props) => {
   let character = isGood ? result.good : result.bad;
   let ment = isGood ? result.goodment : result.badment;
-  let image = `/images/facial/${character?.unique_id}.png`
+  let image = `/images/colored/${character?.unique_id}.png`
   let name = character?.name || ""
  
   return (
@@ -103,7 +106,7 @@ export const RelatedCharacter = ({ isGood, result }: Props) => {
         <ImageWrapper>
           <Image 
             src={image} 
-            width={160} height={160} objectFit="contain"
+            width={160} height={160} objectFit="cover"
             alt={name}
           />
         </ImageWrapper>

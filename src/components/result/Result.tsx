@@ -17,13 +17,17 @@ const Number = styled.h2<{
   text-shadow: -6px -1px 0 #000, 2px -1px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   color: ${({ mainColor }) => mainColor};
 `;
-const ResultWrapper = styled.div`
+const ResultWrapper = styled.div<{
+  mainColor: string;
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 3px solid black;
   position: relative;
-  background-image:  repeating-linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #ccc), repeating-linear-gradient(45deg, #eee 25%, #ffffff 25%, #ffffff 75%, #eee 75%, #eee);
+  ${({ theme, mainColor }) => `
+    background-image:  repeating-linear-gradient(45deg, ${mainColor} 25%, transparent 25%, transparent 75%, #eee 75%, #ccc), repeating-linear-gradient(45deg, ${mainColor} 25%, #ffffff 25%, #ffffff 75%, ${mainColor} 75%, ${mainColor});
+  `}
   background-position: 0 0, 1px 1px;
   background-size: 2px 2px;
 `;
@@ -88,7 +92,7 @@ type Props = {
 export const Result = ({ result, data }: Props) => {
   return (
     <>
-      <ResultWrapper>
+      <ResultWrapper mainColor={result.main_color}>
         <Number mainColor={result.main_color}>
           {result.unique_id.toString().padStart(2, "0")}
         </Number>
