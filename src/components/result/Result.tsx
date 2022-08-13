@@ -51,7 +51,7 @@ const Subname = styled.div`
 
 const Name = styled.h1`
   font-family: "ChosunBg", sans-serif;
-  font-weight: 100;
+  font-weight: 500;
   margin: 0;
 `;
 

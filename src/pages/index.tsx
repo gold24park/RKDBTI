@@ -17,7 +17,7 @@ const Title = styled.h1`
   font-family: "ChosunBg", sans-serif;
   font-size: 66px;
   position: relative;
-  font-weight: 100;
+  font-weight: 500;
   top: ${size.content_padding}px;
   left: 10px;
   color: black;
