@@ -75,15 +75,12 @@ export const getServerSideProps: GetServerSideProps = async ({
       bad,
     };
   }
-
-  const url = req.headers["referer"] || null;
-
   return {
-    props: { result, url },
+    props: { result },
   };
 };
 
-function ResultPage({ result, url }: Props) {
+function ResultPage({ result }: Props) {
   const router = useRouter();
 
   // 직접 테스트 했을 경우
@@ -131,14 +128,14 @@ function ResultPage({ result, url }: Props) {
     <Layout wrapper="result_wrapper">
       <Navbar />
       <Head>
-        <meta property="og:url" content={url || ""} />
+        <meta property="og:url" content={process.env.NEXT_PUBLIC_URL} />
         <meta
           property="og:title"
           content={`김래일의 애니캐 테스트 - 내가 애니캐가 된다면 | ${result.name}`}
         />
         <meta
           property="og:image"
-          content={`${url}/images/facial/${result.unique_id}.png`}
+          content={`${process.env.NEXT_PUBLIC_URL}/images/facial/${result.unique_id}.png`}
         />
         <meta property="og:description" content={result.description} />
       </Head>
