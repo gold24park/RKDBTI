@@ -5,6 +5,8 @@ import styled from "styled-components";
 export type Props = {
     style?: React.CSSProperties;
     shareTitle: string;
+    shareUrl: string;
+    shareImage: string;
     result: MyCharacterResult;
 }
 

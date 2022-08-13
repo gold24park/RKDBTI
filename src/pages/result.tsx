@@ -121,23 +121,29 @@ function ResultPage({ result }: Props) {
     );
   }
 
-  const kakaoShareTitle = "김래일의 애니캐 테스트 - 내가 애니캐가 된다면";
-  const twitterShareTitle = `김래일의 애니캐 테스트 - 내가 애니캐가 된다면\n${result.name}(이)랄까?`;
+  const defaultTitle = "김래일의 애니캐 테스트 - 내가 애니캐가 된다면";
+  const twitterShareTitle = `${defaultTitle}\n${result.name}(이)랄까?`;
+
+  const shareImage = `${process.env.NEXT_PUBLIC_URL}/share/${result.unique_id}.png`;
+  const shareUrl = `${
+    process.env.NEXT_PUBLIC_URL
+  }/result?type=${ResultConverter.encode(result.unique_id)}`;
+  const title = `${defaultTitle} | ${result.name}`;
+  const description = `<${result.name}> ${result.description}`;
 
   return (
     <Layout wrapper="result_wrapper">
       <Navbar />
       <Head>
         <meta property="og:url" content={process.env.NEXT_PUBLIC_URL} />
-        <meta
-          property="og:title"
-          content={`김래일의 애니캐 테스트 - 내가 애니캐가 된다면 | ${result.name}`}
-        />
-        <meta
-          property="og:image"
-          content={`${process.env.NEXT_PUBLIC_URL}/images/facial/${result.unique_id}.png`}
-        />
-        <meta property="og:description" content={result.description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:image" content={shareImage} />
+        <meta property="og:description" content={description} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content={shareImage} />
+        <meta name="twitter:site" content={shareUrl} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description">{description}</meta>
       </Head>
       <Result result={result} data={data} />
       <br />
@@ -157,10 +163,17 @@ function ResultPage({ result }: Props) {
       <TwitterButton
         style={{ marginTop: "60px" }}
         shareTitle={twitterShareTitle}
+        shareImage={shareImage}
+        shareUrl={shareUrl}
         result={result}
       />
       <br />
-      <KakaoButton shareTitle={kakaoShareTitle} result={result} />
+      <KakaoButton
+        shareTitle={defaultTitle}
+        result={result}
+        shareImage={shareImage}
+        shareUrl={shareUrl}
+      />
       <Link href="/">
         <SecondaryButton>다시하기</SecondaryButton>
       </Link>

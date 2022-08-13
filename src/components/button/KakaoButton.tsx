@@ -4,17 +4,12 @@ import { Props, SnsButton } from "./Buttons";
 import { theme } from "@styles/theme";
 import Image from "next/image";
 
-export const KakaoButton = ({ shareTitle, result }: Props) => {
+export const KakaoButton = ({ shareTitle, shareUrl, shareImage, result }: Props) => {
   const handleOnClick = () => {
     logEvent(window.FirebaseAnalytics, "share_kakao", {
       url: location.href,
       typeNumber: result.unique_id,
     });
-
-    const baseUrl = `https://${location.host}`;
-    const resultUrl = `${baseUrl}/result?type=${ResultConverter.encode(
-      result.unique_id
-    )}`;
 
     const description = `<${result.name}> "${result.ment}"`
 
@@ -23,25 +18,25 @@ export const KakaoButton = ({ shareTitle, result }: Props) => {
       content: {
         title: shareTitle,
         description: description,
-        imageUrl: `${process.env.NEXT_PUBLIC_URL}/images/character/${result.unique_id}.png`,
+        imageUrl: shareImage,
         link: {
-          mobileWebUrl: baseUrl,
-          webUrl: baseUrl,
+          mobileWebUrl: shareUrl,
+          webUrl: shareUrl,
         },
       },
       buttons: [
         {
           title: "결과 확인하기",
           link: {
-            mobileWebUrl: resultUrl,
-            webUrl: resultUrl,
+            mobileWebUrl: shareUrl,
+            webUrl: shareUrl,
           },
         },
         {
           title: "나도 해보기",
           link: {
-            mobileWebUrl: baseUrl,
-            webUrl: baseUrl,
+            mobileWebUrl: process.env.NEXT_PUBLIC_URL,
+            webUrl: process.env.NEXT_PUBLIC_URL,
           },
         },
       ],
