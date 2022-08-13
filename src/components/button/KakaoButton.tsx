@@ -13,7 +13,7 @@ export const KakaoButton = ({ shareTitle, shareUrl, shareImage, result }: Props)
 
     const description = `<${result.name}> "${result.ment}"`
 
-    window.Kakao.Link.sendCustom({
+    window.Kakao.Link.sendDefault({
       objectType: "feed",
       content: {
         title: shareTitle,
