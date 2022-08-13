@@ -1,28 +1,34 @@
-import { SecondaryButton, TextButton } from "@components/button/Buttons";
+import {
+  SecondaryButton,
+  SnsButton
+} from "@components/button/Buttons";
 import { KakaoButton } from "@components/button/KakaoButton";
 import { TwitterButton } from "@components/button/TwitterButton";
 import { Copyright } from "@components/Copyright";
+import { CommentLayout } from "@components/layout/CommentLayout";
 import { Layout } from "@components/layout/Layout";
 import { Navbar } from "@components/Navbar";
 import { RelatedCharacter } from "@components/result/RelatedCharacter";
 import { Result } from "@components/result/Result";
-import { SystemHeading, SystemWrapper } from "@components/System";
 import { YoutubeAdvertisement } from "@components/result/YoutubeAdvertisement";
+import { SystemHeading, SystemWrapper } from "@components/System";
 import { DatabaseRequest, getDatabase } from "@middlewares/database";
 import { fetcher } from "@services/fetcher";
 import { Character } from "@services/models/Chracter";
 import { MyCharacterResult } from "@services/models/MyCharacterResult";
 import { StatisticsResult } from "@services/models/StatisticsResult";
 import { ResultConverter } from "@services/ResultConverter";
+import { theme } from "@styles/theme";
+import { logEvent } from "firebase/analytics";
 import { Filter, FindOptions } from "mongodb";
 import { GetServerSideProps } from "next";
 import nc from "next-connect";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
-import useSWR from "swr";
-import { CommentLayout } from "@components/layout/CommentLayout";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import useSWR from "swr";
 
 type Props = {
   result: MyCharacterResult | null;
@@ -131,6 +137,25 @@ function ResultPage({ result }: Props) {
   const title = `${defaultTitle} | ${result.name}`;
   const description = `<${result.name}> ${result.description}`;
 
+  const handleClickShare = () => {
+    logEvent(window.FirebaseAnalytics, "share_result", {
+      url: location.href,
+    });
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title: defaultTitle,
+          url: shareUrl,
+        })
+        .then(() => {})
+        .catch(console.error);
+    } else {
+      navigator.clipboard.writeText(location.href);
+      alert("링크가 복사되었다능!");
+    }
+  };
+
   return (
     <Layout wrapper="result_wrapper">
       <Navbar />
@@ -143,7 +168,7 @@ function ResultPage({ result }: Props) {
         <meta name="twitter:card" content={shareImage} />
         <meta name="twitter:site" content={shareUrl} />
         <meta name="twitter:title" content={title} />
-        <meta name="twitter:description">{description}</meta>
+        <meta name="twitter:description" content={description} />
       </Head>
       <Result result={result} data={data} />
       <br />
@@ -174,6 +199,16 @@ function ResultPage({ result }: Props) {
         shareImage={shareImage}
         shareUrl={shareUrl}
       />
+      <SnsButton
+        onClick={handleClickShare}
+        backgroundColor={theme.colors.darkSurface}
+        fontColor={"black"}
+      >
+        <div className="imageWrapper">
+          <Image src="/images/link.png" width={30} height={30} alt="link" />
+        </div>
+        링크 공유하기
+      </SnsButton>
       <Link href="/">
         <SecondaryButton>다시하기</SecondaryButton>
       </Link>
