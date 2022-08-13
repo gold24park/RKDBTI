@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const CopyrightText = styled.div`
+const CopyrightText = styled.footer`
     text-align: center;
     font-size: 14px;
     color: #8c8f92;

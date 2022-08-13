@@ -6,7 +6,7 @@ import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { theme } from "@styles/theme";
 import Image from "next/image";
 
-const TestQuestion = styled.pre`
+const TestQuestion = styled.div`
   font-family: "ChosunKm", serif;
   font-size: 18px;
   font-weight: 500;
@@ -44,7 +44,7 @@ type Props = {
 
 export const Question = ({ question, questionIndex }: Props) => {
   return (
-    <div style={{ background: theme.colors.text500 }}>
+    <article style={{ background: theme.colors.text500 }}>
       <motion.div
         key={questionIndex}
         variants={Animations.slide.variants}
@@ -69,6 +69,6 @@ export const Question = ({ question, questionIndex }: Props) => {
           <TestQuestion>{question}</TestQuestion>
         </motion.div>
       </motion.div>
-    </div>
+    </article>
   );
 };

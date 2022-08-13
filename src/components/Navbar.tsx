@@ -20,7 +20,7 @@ const LogoWrapper = styled(BaseImageWrapper)`
   }
 `
 
-const NavWrapper = styled.nav`
+const NavWrapper = styled.header`
   display: flex;
   justify-items: center;
   align-items: center;
