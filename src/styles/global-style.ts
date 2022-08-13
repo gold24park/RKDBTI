@@ -3,28 +3,6 @@ import { media, size } from "./size";
 import { theme } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
-    /* 만화영어 폰트는 'Limelight' */
-    /* 조선 굴림체 */
-    @font-face {
-        font-family: 'ChosunGu';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-    /* 조선 견고딕 */
-    @font-face {
-        font-family: 'ChosunBg';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunBg.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-    /* 조선 굵은 명조 */
-    @font-face {
-        font-family: 'ChosunKm';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunKm.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
     html {
         font-size: 16px;
         font-family: 'ChosunGu', sans-serif;

@@ -1,3 +1,4 @@
+import { media } from "@styles/size";
 import styled from "styled-components";
 
 export const SectionTitle = styled.div`
@@ -9,4 +10,7 @@ export const SectionTitle = styled.div`
   display: inline-block;
   margin-bottom: 14px;
   margin-top: 24px;
+  ${media.phone} {
+    font-size: 14px;
+  }
 `;

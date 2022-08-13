@@ -1,3 +1,4 @@
+import { media } from "@styles/size";
 import { theme } from "@styles/theme";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -14,6 +15,9 @@ const FlexWrapper = styled.div`
 const CommentNicknameInput = styled.input`
   padding: 10px;
   border: none;
+  ${media.phone} {
+    width: 130px;
+  }
 `;
 const CommentTextInput = styled.textarea`
   width: 100%;
@@ -30,6 +34,9 @@ const ButtonUpload = styled.button`
   cursor: pointer;
   &:disabled {
     background: ${theme.colors.text200};
+  }
+  ${media.phone} {
+    padding: 10px 20px;
   }
 `;
 

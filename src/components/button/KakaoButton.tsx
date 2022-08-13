@@ -16,15 +16,14 @@ export const KakaoButton = ({ shareTitle, result }: Props) => {
       result.unique_id
     )}`;
 
-    // TODO: remove default image
+    const description = `<${result.name}> "${result.ment}"`
+
     window.Kakao.Link.sendDefault({
       objectType: "feed",
       content: {
         title: shareTitle,
-        description: result.name,
-        imageUrl:
-          `https://rail-o-taku.space/images/character/${result.unique_id}.png` ||
-          "https://avatars.githubusercontent.com/u/12989924?v=4",
+        description: description,
+        imageUrl: `https://rail-o-taku.space/images/character/${result.unique_id}.png`,
         link: {
           mobileWebUrl: baseUrl,
           webUrl: baseUrl,

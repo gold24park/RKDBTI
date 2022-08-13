@@ -1,0 +1,24 @@
+/* 조선 굴림 */
+@font-face {
+    font-family: 'ChosunGu';
+    src: url('/fonts/ChosunGu.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+/* 조선 견고딕 */
+@font-face {
+    font-family: 'ChosunBg';
+    src: url('/fonts/ChosunBg.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+/* 조선 굵은 명조 */
+@font-face {
+    font-family: 'ChosunKm';
+    src: url('/fonts/ChosunKm.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

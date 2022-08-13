@@ -1,15 +1,10 @@
-import React, { ReactElement } from "react";
 import Document, {
-  DocumentInitialProps,
-  DocumentContext,
-  Html,
+  DocumentContext, DocumentInitialProps, Head, Html,
   Main,
-  NextScript,
-  Head,
+  NextScript
 } from "next/document";
+import { ReactElement } from "react";
 import { ServerStyleSheet } from "styled-components";
-import { v4 } from "uuid";
-import PageTransition from "@components/PageTransition";
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -43,7 +38,12 @@ export default class MyDocument extends Document {
   render(): ReactElement {
     return (
       <Html lang="ko">
-        <Head></Head>
+        <Head>
+          <link
+            rel="stylesheet preload"
+            href="/fonts/fonts.css"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

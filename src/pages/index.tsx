@@ -14,15 +14,17 @@ import Link from "next/link";
 import styled from "styled-components";
 
 const Title = styled.h1`
-  font-family: "ChosunKm", serif;
+  font-family: "ChosunBg", sans-serif;
   font-size: 66px;
   position: relative;
+  font-weight: 100;
   top: ${size.content_padding}px;
   left: 10px;
   color: black;
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
     1px 1px 0 #fff;
   margin: 2rem 0 10px 0;
+  line-height: 1.2;
   z-index: 1;
   ${media.phone} {
     font-size: 48px;
@@ -129,7 +131,7 @@ const ShareButtonWrapper = styled.div`
 
 const MainImageWrapper = styled(BaseImageWrapper)`
   position: absolute;
-  width: 700px;
+  width: 650px;
   right: -100px;
   bottom: -100px;
   filter: grayscale(70%);
@@ -150,9 +152,9 @@ const MainImageWrapper = styled(BaseImageWrapper)`
     }
   }
   ${media.phone} {
-    width: 470px;
-    right: -80px;
-    bottom: -120px;
+    width: 400px;
+    right: -40px;
+    bottom: -140px;
   }
 `
 
