@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
       <Html lang="ko">
         <Head>
           <link
-            rel="stylesheet preload"
+            rel="stylesheet"
             href="/fonts/fonts.css"
           />
           <link rel="preconnect" href="https://fonts.googleapis.com"></link>

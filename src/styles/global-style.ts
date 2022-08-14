@@ -3,6 +3,9 @@ import { media, size } from "./size";
 import { theme } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
+    :root {
+      color-scheme: light only;
+    }
     html {
         font-size: 16px;
         font-family: 'ChosunGu', sans-serif;

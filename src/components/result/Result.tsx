@@ -3,6 +3,7 @@ import { StatisticsResult } from "@services/models/StatisticsResult";
 import { media, size } from "@styles/size";
 import styled from "styled-components";
 import Image from "next/image";
+import isDarkColor from '@services/ColorUtil';
 import { AutoHeightImageWrapper, BaseImageWrapper } from "../BaseImageWrapper";
 
 const Number = styled.h2<{
@@ -15,9 +16,11 @@ const Number = styled.h2<{
   margin: 0;
   font-family: "Limelight";
   text-shadow: -6px -1px 0 #000, 2px -1px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-  color: ${({ mainColor }) => mainColor};
+  color: white;
 `;
+
 const ResultWrapper = styled.div<{
+  isDark: boolean;
   mainColor: string;
 }>`
   display: flex;
@@ -25,11 +28,10 @@ const ResultWrapper = styled.div<{
   align-items: center;
   border: 3px solid black;
   position: relative;
-  ${({ theme, mainColor }) => `
-    background-image:  repeating-linear-gradient(45deg, ${mainColor} 25%, transparent 25%, transparent 75%, #eee 75%, #ccc), repeating-linear-gradient(45deg, ${mainColor} 25%, #ffffff 25%, #ffffff 75%, ${mainColor} 75%, ${mainColor});
+  ${({ isDark, mainColor }) => `
+    color: ${isDark ? 'white' : 'black'};
+    background: ${mainColor};
   `}
-  background-position: 0 0, 1px 1px;
-  background-size: 2px 2px;
 `;
 
 const Ment = styled.div`
@@ -46,6 +48,7 @@ const Ment = styled.div`
 const Subname = styled.div`
   font-family: "ChosunBg", sans-serif;
   margin-top: 20px;
+  margin-bottom: 10px;
   font-size: 20px;
   ${media.phone} {
     font-size: 16px;
@@ -57,6 +60,10 @@ const Name = styled.h1`
   font-family: "ChosunBg", sans-serif;
   font-weight: 500;
   margin: 0;
+  padding: 10px 20px;
+  background: white;
+  border: 3px solid black;
+  color: black;
 `;
 
 const ResultImageWrapper = styled(AutoHeightImageWrapper)`
@@ -72,6 +79,7 @@ const Statistics = styled.div`
   text-align: right;
   background-image: linear-gradient(0deg, #ffffff 50%, #c7c7c7 50%);
   background-size: 2px 2px;
+  color: black;
 `;
 
 const Description = styled.div`
@@ -90,9 +98,12 @@ type Props = {
 };
 
 export const Result = ({ result, data }: Props) => {
+
+  const isDark = isDarkColor(result.main_color);
+
   return (
     <>
-      <ResultWrapper mainColor={result.main_color}>
+      <ResultWrapper isDark={isDark} mainColor={result.main_color}>
         <Number mainColor={result.main_color}>
           {result.unique_id.toString().padStart(2, "0")}
         </Number>

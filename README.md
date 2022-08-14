@@ -39,6 +39,8 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="fbmid"
 
 ## Pages
 
+![screenshot](./screenshots/screenshot.png)
+
 - `/`: 메인
 - `/test`: 테스트 수행 페이지
 - `/result`: 결과 페이지

@@ -23,6 +23,6 @@
       "@services/*": ["src/services/*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "test/**/*.ts", "src/services/fetcher.js", "src/components/PageTransition.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "test/**/*.ts", "src/services/fetcher.js", "src/components/PageTransition.js", "src/services/ColorUtil"],
   "exclude": ["node_modules"]
 }
