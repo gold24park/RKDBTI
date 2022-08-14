@@ -35,6 +35,8 @@ NEXT_PUBLIC_FIREBASE_API_KEY="fbapikey"
 NEXT_PUBLIC_FIREBASE_APP_ID="fbappid"
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="fbsenderid"
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="fbmid"
+
+NEXT_PUBLIC_PAGE_SIZE=5
 ```
 
 ## Pages
@@ -44,3 +46,7 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="fbmid"
 - `/`: 메인
 - `/test`: 테스트 수행 페이지
 - `/result`: 결과 페이지
+
+## Demo video
+
+![video](./screenshots/video.gif)
