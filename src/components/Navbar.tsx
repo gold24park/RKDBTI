@@ -42,11 +42,11 @@ const NavWrapper = styled.header`
   }
   
   @media (min-height: ${size.container_height}px) {
-    top: calc(50% - ${size.container_height / 2}px + 2px);
+    top: calc(50% - ${size.container_height / 2}px + 1px);
   }
 
   ${media.tablet} {
-    top: calc(50% - ${size.tablet.container_height / 2}px + 2px);
+    top: calc(50% - ${size.tablet.container_height / 2}px + 1px);
   }
   
   ${media.phone} {
