@@ -33,7 +33,7 @@ const NavWrapper = styled.header`
   width: calc(100% - 2px);
   max-width: ${size.container_width - 2}px;
   background: white;
-  z-index: 1;
+  z-index: 100;
   cursor: pointer;
   
   &:hover {

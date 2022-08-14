@@ -1,10 +1,9 @@
+import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { Animations } from "@services/animations";
 import { media, size } from "@styles/size";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { theme } from "@styles/theme";
-import Image from "next/image";
+import { motion } from "framer-motion";
+import styled from "styled-components";
 
 const TestQuestion = styled.div`
   font-family: "ChosunKm", serif;

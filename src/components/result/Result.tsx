@@ -1,10 +1,9 @@
+import isDarkColor from '@services/ColorUtil';
 import { MyCharacterResult } from "@services/models/MyCharacterResult";
 import { StatisticsResult } from "@services/models/StatisticsResult";
-import { media, size } from "@styles/size";
+import { media } from "@styles/size";
 import styled from "styled-components";
-import Image from "next/image";
-import isDarkColor from '@services/ColorUtil';
-import { AutoHeightImageWrapper, BaseImageWrapper } from "../BaseImageWrapper";
+import { AutoHeightImageWrapper } from "../BaseImageWrapper";
 
 const CharacterInfoWrapper = styled.div`
   display: flex;

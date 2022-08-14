@@ -21,7 +21,7 @@
         "goodment": "이 타입이 겉으로 보여주는 모습은 아주 상식적이야.",
         "bad": 17,
         "badment": "이 타입은 당신에겐 너무 소란스러워 보여.",
-        "main_color": "#7fd66b"
+        "main_color": "#45a15e"
     },
     {
         "unique_id": 3,
@@ -33,7 +33,7 @@
         "goodment": "이 타입과 당신이 함께라면 최강의 악당이 될 수 있어.",
         "bad": 2,
         "badment": "이 타입은 당신의 호기심을 전혀 자극하지 않아.",
-        "main_color": "#8e1ad6"
+        "main_color": "#9671e6"
     },
     {
         "unique_id": 4,
@@ -93,7 +93,7 @@
         "goodment": "이 타입은 은근히 손이 많이 가니까. 당신이 딱 맞지.",
         "bad": 9,
         "badment": "이 타입은 도움보단 스스로 해결하는 걸 좋아해.",
-        "main_color": "#fd87ff"
+        "main_color": "#ffd080"
     },
     {
         "unique_id": 9,
@@ -129,7 +129,7 @@
         "goodment": "이 타입은 당신의 흥미 레이더를 어쩐지 자극해.",
         "bad": 5,
         "badment": "이 타입은 당신의 흥미 레이더를 자극하지 않아.",
-        "main_color": "#e6c50b"
+        "main_color": "#9ec1d0"
     },
     {
         "unique_id": 12,
@@ -189,7 +189,7 @@
         "goodment": "이 타입은 유일하게 당신이 쿨하다고 생각해.",
         "bad": 4,
         "badment": "이 타입은 당신이 뭘 하고 싶은지 이해하지 못해.",
-        "main_color": "#f0866e"
+        "main_color": "#a9affc"
     },
     {
         "unique_id": 17,
