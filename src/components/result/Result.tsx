@@ -6,17 +6,56 @@ import Image from "next/image";
 import isDarkColor from '@services/ColorUtil';
 import { AutoHeightImageWrapper, BaseImageWrapper } from "../BaseImageWrapper";
 
-const Number = styled.h2<{
-  mainColor: string;
-}>`
+const CharacterInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
   position: absolute;
   left: 20px;
   bottom: 0px;
-  font-size: 80px;
+  z-index: 1;
+  ${media.phone} {
+    bottom: 10px;
+  }
+`
+
+const NameWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+  flex-direction: column;
+  font-family: "ChosunBg", sans-serif;
+  .name {
+    margin: 0;
+    font-weight: 500;
+    text-shadow: -4px -1px 0 #000, 2px -1px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    margin-top: -10px;
+    color: white;
+    font-size: 48px;
+  }
+  .subname {
+    font-size: 28px;
+  }
+  ${media.phone} {
+    .name {
+      font-size: 32px;
+    }
+    .subname {
+      font-size: 24px;
+    }
+  }
+`
+
+const Number = styled.h2<{
+  mainColor: string;
+}>`
+  font-size: 110px;
   margin: 0;
   font-family: "Limelight";
   text-shadow: -6px -1px 0 #000, 2px -1px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   color: white;
+  ${media.phone} {
+    font-size: 80px;
+  }
 `;
 
 const ResultWrapper = styled.div<{
@@ -26,49 +65,46 @@ const ResultWrapper = styled.div<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 3px solid black;
+  margin-top: 3px;
+  outline: 3px solid black;
   position: relative;
   ${({ isDark, mainColor }) => `
     color: ${isDark ? 'white' : 'black'};
     background: ${mainColor};
+    background-image: url("/images/emblem.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    ${media.phone} {
+      background-size: 340px;
+    }
   `}
 `;
 
 const Ment = styled.div`
   font-family: "ChosunKm", serif;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
   margin-top: 20px;
+  margin-bottom: -20px;
   text-align: center;
   ${media.phone} {
     font-size: 22px;
   }
 `;
 
-const Subname = styled.div`
-  font-family: "ChosunBg", sans-serif;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 20px;
-  ${media.phone} {
-    font-size: 16px;
-    margin-top: 10px;
-  }
-`;
-
-const Name = styled.h1`
-  font-family: "ChosunBg", sans-serif;
-  font-weight: 500;
-  margin: 0;
-  padding: 10px 20px;
-  background: white;
-  border: 3px solid black;
-  color: black;
-`;
-
 const ResultImageWrapper = styled(AutoHeightImageWrapper)`
-  width: 80%;
+  width: 70%;
   z-index: 0;
+  margin-bottom: 60px;
+  ${media.phone} {
+    width: 80%;
+    margin-bottom: 40px;
+  }
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Statistics = styled.div`
@@ -77,6 +113,7 @@ const Statistics = styled.div`
   font-weight: bold;
   width: 100%;
   text-align: right;
+  padding-top: 20px;
   background-image: linear-gradient(0deg, #ffffff 50%, #c7c7c7 50%);
   background-size: 2px 2px;
   color: black;
@@ -104,17 +141,20 @@ export const Result = ({ result, data }: Props) => {
   return (
     <>
       <ResultWrapper isDark={isDark} mainColor={result.main_color}>
-        <Number mainColor={result.main_color}>
-          {result.unique_id.toString().padStart(2, "0")}
-        </Number>
+        <CharacterInfoWrapper>
+          <Number mainColor={result.main_color}>
+            {result.unique_id.toString().padStart(2, "0")}
+          </Number>
+          <NameWrapper>
+            <div className="subname">{result.subname}</div>
+            <h1 className="name">{result.name}</h1>
+          </NameWrapper>
+        </CharacterInfoWrapper>
+        
         <Ment>{`"${result.ment}"`}</Ment>
-        <Subname>{result.subname}</Subname>
-        <Name>{result.name}</Name>
         <ResultImageWrapper>
-          <Image
+          <img
             src={`/images/character/${result.unique_id}.png`}
-            layout="fill"
-            objectFit="contain" 
             alt={result.name}
           />
         </ResultImageWrapper>

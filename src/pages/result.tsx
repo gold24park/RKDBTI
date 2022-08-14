@@ -42,13 +42,16 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const middleware = nc().use(getDatabase);
   await middleware.run(req, res);
-  const { type } = query;
+  const { type, tn } = query;
 
   const db = (req as DatabaseRequest).db;
 
   var result = null;
 
   let typeNumber = parseInt(ResultConverter.decode(type as string), 0);
+  if (isNaN(typeNumber)) {
+    typeNumber = parseInt(tn as string);
+  }
 
   let character: Character | null | undefined = await db.characters?.findOne(
     {
@@ -100,11 +103,13 @@ function ResultPage({ result }: Props) {
   useEffect(() => {
     // 직접 테스트 여부를 저장했으므로 가린다.
     const params = new URLSearchParams(location.search);
-    window.history.pushState(
-      null,
-      "result",
-      `/result?type=${params.get("type")}`
-    );
+    if (params.get('type')) {
+      window.history.pushState(
+        null,
+        "result",
+        `/result?type=${params.get("type")}`
+      );
+    }
   }, []);
 
   if (result == null) {

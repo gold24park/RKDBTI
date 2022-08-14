@@ -31,9 +31,13 @@ const TestIllustWrapper = styled(BaseImageWrapper)`
     height: 100%;
     position: relative !important;
     object-fit: cover;
+    margin-top: ${size.content_padding}px;
   }
-  & > span {
-    margin-top: ${size.content_padding}px !important;
+  ${media.phone} {
+    padding: 0;
+    img {
+      margin-top: 0;
+    }
   }
 `;
 
@@ -51,12 +55,9 @@ export const Question = ({ question, questionIndex }: Props) => {
         transition={Animations.slide.transition}
       >
         <TestIllustWrapper key="">   
-          <Image
+          <img
             className="image"
             src={`/images/question/${questionIndex + 1}.jpg`}
-            layout="fill"
-            objectFit="contain"
-            priority={true}
             alt={question}
           />
         </TestIllustWrapper>
