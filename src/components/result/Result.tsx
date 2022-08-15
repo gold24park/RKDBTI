@@ -13,7 +13,7 @@ const CharacterInfoWrapper = styled.div`
   bottom: 0px;
   z-index: 1;
   ${media.phone} {
-    bottom: 10px;
+    bottom: 20px;
   }
 `
 
@@ -36,10 +36,11 @@ const NameWrapper = styled.div`
   }
   ${media.phone} {
     .name {
-      font-size: 32px;
+      font-size: 28px;
+      margin-top: -4px;
     }
     .subname {
-      font-size: 24px;
+      font-size: 18px;
     }
   }
 `
@@ -53,7 +54,7 @@ const Number = styled.h2<{
   text-shadow: -6px -1px 0 #000, 2px -1px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   color: white;
   ${media.phone} {
-    font-size: 80px;
+    font-size: 64px;
   }
 `;
 
@@ -74,7 +75,7 @@ const ResultWrapper = styled.div<{
     background-repeat: no-repeat;
     background-position: center;
     ${media.phone} {
-      background-size: 340px;
+      background-size: 300px;
     }
   `}
 `;
