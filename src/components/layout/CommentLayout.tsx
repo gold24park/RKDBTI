@@ -16,7 +16,7 @@ export const CommentLayout = ({ unique_id, character_name, color }: Props) => {
   const reqHeaders = new Headers({
     "Content-Type": "application/json",
   });
-  const pageSize = parseInt(process.env.NEXT_PUBLIC_PAGE_SIZE || "8");
+  const pageSize = parseInt(process.env.NEXT_PUBLIC_PAGE_SIZE || "5");
   const [page, setPage] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [comments, setComments] = useState<Comment[]>([]);
