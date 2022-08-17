@@ -5,7 +5,7 @@ import { NextApiResponse } from "next";
 import nc from "next-connect";
 
 const handler = nc()
-const PAGE_SIZE = 8
+const PAGE_SIZE = parseInt(process.env.NEXT_PUBLIC_PAGE_SIZE || "5")
 
 /**
  * 댓글 조회
