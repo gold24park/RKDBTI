@@ -35,6 +35,7 @@ export const Layout = (props: Props) => {
         <meta name="twitter:title" content={title} />
         <meta property="twitter:domain" content={process.env.NEXT_PUBLIC_URL}/>
         <link rel="icon" href="/images/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet"></link>
       </Head>
       <PageTransition>
         <div id="frame">
