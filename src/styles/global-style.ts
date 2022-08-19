@@ -35,6 +35,7 @@ export const GlobalStyle = createGlobalStyle`
         height: 100%;
     }
     #frame {
+        position: relative;
         border: 1px solid black;
         width: 100%;
         height: 100%;
@@ -51,7 +52,7 @@ export const GlobalStyle = createGlobalStyle`
         position: absolute;
         width: 100%;
         height: 100%;
-        padding-top: ${size.navbar_height}px;
+        padding-top: calc(${size.navbar_height}px + 30px);
         padding-bottom: 56px;
         overflow-x: hidden;
         overflow-y: scroll;
@@ -88,7 +89,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     ${media.phone} {
         #test_wrapper {
-            padding-top: ${size.mobile.navbar_height}px;
+            padding-top: calc(${size.mobile.navbar_height}px + 28px);
         }
         #result_wrapper {
             padding: ${size.mobile.navbar_height}px ${size.content_padding}px 36px ${size.content_padding}px;

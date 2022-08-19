@@ -45,7 +45,8 @@ export default class MyDocument extends Document {
           />
           <link rel="preconnect" href="https://fonts.googleapis.com"></link>
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"></link>
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6387136497419791" crossOrigin="anonymous"></script>
+          <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+          <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet"></link>
         </Head>
         <body>
           <Main />

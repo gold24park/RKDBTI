@@ -1,6 +1,5 @@
 import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { PrimaryButton, SecondaryButton } from "@components/button/Buttons";
-import { Copyright } from "@components/Copyright";
 import { Layout } from "@components/layout/Layout";
 import { logEvent } from "@firebase/analytics";
 import { DatabaseRequest, getDatabase } from "@middlewares/database";
@@ -111,22 +110,22 @@ const RailComicsOne = styled.h2`
   right: ${size.content_padding}px;
   ${media.phone} {
     font-size: 98px;
-    bottom: 50px;
+    bottom: 65px;
   }
 `;
 
 const StartButtonWrapper = styled.div`
   position: absolute;
-  bottom: calc(40px + ${size.button_height}px + 10px);
+  bottom: calc(60px + ${size.button_height}px + 10px);
   width: calc(100% - ${size.content_padding * 2}px) !important;
   ${media.phone} {
-    bottom: calc(40px + ${size.mobile.button_height}px + 10px);
+    bottom: calc(60px + ${size.mobile.button_height}px + 10px);
   }
 `
 
 const ShareButtonWrapper = styled.div`
   position: absolute;
-  bottom: 40px;
+  bottom: 60px;
   width: calc(100% - ${size.content_padding * 2}px) !important;
 `
 
@@ -264,17 +263,6 @@ const Home: NextPage = ({ totalCount }: InferGetServerSidePropsType<typeof getSe
             다른 오타쿠에게 공유하기
           </SecondaryButton>
         </ShareButtonWrapper>
-
-        <div
-          style={{
-            position: "absolute",
-            bottom: "14px",
-            left: "50%",
-            transform: "translateX(-50%)",
-          }}
-        >
-          <Copyright />
-        </div>
       </div>
     </Layout>
   );

@@ -1,5 +1,7 @@
+import { AdfitBannerAd } from "@components/AdfitBannerAd";
 import Head from "next/head";
 import { ReactNode } from "react";
+import styled from "styled-components";
 import PageTransition from "../PageTransition";
 
 type Props = {
@@ -8,10 +10,12 @@ type Props = {
 }
 
 
+
 export const Layout = (props: Props) => {
   const title = "김래일의 애니캐 테스트 - 내가 애니캐가 된다면"
   const description = "내가 만약 애니메이션 캐릭터가 된다면 어떤 모습일까? 오타쿠를 위한 덕BTI 김래일의 애니캐 테스트!"
   const metaImage = `${process.env.NEXT_PUBLIC_URL}/images/meta.png`;
+  
   return (
     <>
       <Head>
@@ -31,13 +35,13 @@ export const Layout = (props: Props) => {
         <meta name="twitter:title" content={title} />
         <meta property="twitter:domain" content={process.env.NEXT_PUBLIC_URL}/>
         <link rel="icon" href="/images/favicon.ico" />
-        <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet"></link>
       </Head>
       <PageTransition>
         <div id="frame">
           <div id={props.wrapper || "wrapper"}>
             {props.children}
           </div>
+          <AdfitBannerAd/>
         </div>
       </PageTransition>
     </>
