@@ -1,3 +1,4 @@
+import { AdfitBannerAd } from "@components/AdfitBannerAd";
 import {
   SecondaryButton,
   SnsButton

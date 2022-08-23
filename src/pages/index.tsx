@@ -1,3 +1,4 @@
+import { AdfitBannerAd } from "@components/AdfitBannerAd";
 import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { PrimaryButton, SecondaryButton } from "@components/button/Buttons";
 import { Layout } from "@components/layout/Layout";

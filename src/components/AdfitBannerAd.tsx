@@ -1,16 +1,17 @@
+import { size } from "@styles/size";
 import React from "react";
 import styled from "styled-components";
 
+
 const BannerAd = styled.div`
-  z-index: 100;
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
   width: 100%;
 `
 
-export class AdfitBannerAd extends React.Component {
+export class AdfitBannerAd extends React.Component<{inline?: boolean}> {
+
+    constructor(props: {inline?: boolean}) {
+        super(props)
+    }
     
     shouldComponentUpdate() {
         return false;
@@ -35,8 +36,18 @@ export class AdfitBannerAd extends React.Component {
     }
 
     render() {
+        let style = {};
+        if (!this.props.inline) {
+            style = {
+                position: 'absolute',
+                left: '50%',
+                bottom: '-6px',
+                zIndex: '100',
+                transform: 'translateX(-50%)',
+            }
+        }
         return (
-            <BannerAd id="banner_ad"/>
+            <BannerAd id="banner_ad" style={style}/>
         )
     }
 }

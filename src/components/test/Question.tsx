@@ -1,3 +1,4 @@
+import { AdfitBannerAd } from "@components/AdfitBannerAd";
 import { BaseImageWrapper } from "@components/BaseImageWrapper";
 import { Animations } from "@services/animations";
 import { media, size } from "@styles/size";
@@ -69,6 +70,7 @@ export const Question = ({ question, questionIndex }: Props) => {
           <TestQuestion>{question}</TestQuestion>
         </motion.div>
       </motion.div>
+      <AdfitBannerAd inline/>
     </article>
   );
 };

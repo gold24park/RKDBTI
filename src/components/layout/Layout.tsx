@@ -1,5 +1,6 @@
 import { AdfitBannerAd } from "@components/AdfitBannerAd";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import styled from "styled-components";
 import PageTransition from "../PageTransition";
@@ -12,6 +13,8 @@ type Props = {
 
 
 export const Layout = (props: Props) => {
+  const router = useRouter()
+  
   const title = "김래일의 애니캐 테스트 - 내가 애니캐가 된다면"
   const description = "내가 만약 애니메이션 캐릭터가 된다면 어떤 모습일까? 오타쿠를 위한 덕BTI 김래일의 애니캐 테스트!"
   const metaImage = `${process.env.NEXT_PUBLIC_URL}/images/meta.png`;
@@ -42,9 +45,13 @@ export const Layout = (props: Props) => {
           <div id={props.wrapper || "wrapper"}>
             {props.children}
           </div>
-          <AdfitBannerAd/>
         </div>
       </PageTransition>
+      {
+        router.asPath.includes('test') == false && (
+          <AdfitBannerAd/>
+        )
+      }
     </>
   )
 };
