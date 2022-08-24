@@ -48,7 +48,7 @@ export const Layout = (props: Props) => {
         </div>
       </PageTransition>
       {
-        router.asPath.includes('test') == false && (
+        router.asPath == '/' && (
           <AdfitBannerAd/>
         )
       }

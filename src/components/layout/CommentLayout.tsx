@@ -1,3 +1,4 @@
+import { AdfitBannerAd } from "@components/AdfitBannerAd";
 import { CommentInput } from "@components/result/CommentInput";
 import { CommentItem } from "@components/result/CommentItem";
 import { SectionTitle } from "@components/SectionTitle";
@@ -83,6 +84,7 @@ export const CommentLayout = ({ unique_id, character_name, color }: Props) => {
         requestNewPage={() => {
           page == 1 ? requestPage() : setPage(1);
         }} />
+      <AdfitBannerAd inline/>
       {comments.map((comment) => {
         return (
           <CommentItem

@@ -5,7 +5,7 @@ const customMediaQuery = (maxWidth: number): string => {
 export const size = {
   navbar_height: 60,
   container_width: 650,
-  container_height: 1080,
+  container_height: 1000,
   content_padding: 20,
   button_height: 60,
   tablet: {

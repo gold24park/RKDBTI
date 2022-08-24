@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 const BannerAd = styled.div`
   width: 100%;
+  max-width: ${size.container_width}px;
 `
 
 export class AdfitBannerAd extends React.Component<{inline?: boolean}> {
