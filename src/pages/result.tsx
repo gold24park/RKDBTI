@@ -133,8 +133,8 @@ function ResultPage({ result }: Props) {
     );
   }
 
-  const defaultTitle = "김래일의 애니캐 테스트 - 내가 애니캐가 된다면";
-  const twitterShareTitle = `${defaultTitle}\n${result.name}(이)랄까?`;
+  const defaultTitle = "내가 애니캐가 된다면?";
+  const twitterShareTitle = `${defaultTitle}\n${result.name}(이)랄까? #오타쿠 #심리테스트 #애니캐릭터 #애캐테`;
 
   const shareImage = `${process.env.NEXT_PUBLIC_URL}/images/share/${result.unique_id}.png`;
   const shareKakaoImage = `${process.env.NEXT_PUBLIC_URL}/images/colored/${result.unique_id}.png`;
