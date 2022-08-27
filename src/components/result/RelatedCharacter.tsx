@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Image from "next/image";
 import { SectionTitle } from "@components/SectionTitle";
 import { BaseImageWrapper } from "@components/BaseImageWrapper";
+import Link from "next/link";
+import { ResultConverter } from "@services/ResultConverter";
 
 const RelatedCharacterWrapper = styled.div`
   display: flex;
@@ -75,6 +77,7 @@ const ImageWrapper = styled(BaseImageWrapper)`
   width: 160px;
   height: 160px;
   border: 1px solid black;
+  cursor: pointer;
   ${media.phone} {
     width: 120px;
     height: 120px;
@@ -91,6 +94,7 @@ export const RelatedCharacter = ({ isGood, result }: Props) => {
   let ment = isGood ? result.goodment : result.badment;
   let image = `/images/colored/${character?.unique_id}.png`
   let name = character?.name || ""
+  let uniqueId = character?.unique_id || 0
  
   return (
     <>
@@ -103,13 +107,15 @@ export const RelatedCharacter = ({ isGood, result }: Props) => {
             {character?.unique_id?.toString().padStart(2, '0')}
         </Number>
         </ContentWrapper>
-        <ImageWrapper>
-          <Image 
-            src={image} 
-            width={160} height={160} objectFit="cover"
-            alt={name}
-          />
-        </ImageWrapper>
+        <Link href={`/result?type=${ResultConverter.encode(uniqueId)}`}>
+          <ImageWrapper>
+            <Image 
+              src={image} 
+              width={160} height={160} objectFit="cover"
+              alt={name}
+            />
+          </ImageWrapper>
+        </Link>
       </RelatedCharacterWrapper>
     </>
   );
