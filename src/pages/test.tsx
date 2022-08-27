@@ -26,12 +26,30 @@ const AnswerWrapper = styled.div`
 const TestPage: NextPage = () => {
   const router = useRouter();
 
-  const [loading, setLoading] = useState<boolean>(false);
   const [answers, setAnswers] = useState<number[]>(new Array());
   const [scores, setScores] = useState<number[]>(
     new Array(questions[0].a[0].type.length).fill(0)
   );
   const [questionIndex, setQuestionIndex] = useState<number>(0);
+
+  const getResults = async () => {
+
+    let typeNumber = scores.indexOf(Math.max(...scores)) + 1;
+
+    if (typeNumber > 0) {
+      await updateStatistics(typeNumber);
+      await new Promise((r) => setTimeout(r, 500));
+    }
+
+    // t: 직접 테스트함을 표시
+    router.push({
+      pathname: "/result",
+      query: {
+        type: ResultConverter.encode(typeNumber),
+        t: 1
+      },
+    });
+  }
 
   // 답변 선택후 스크롤 가장 위로
   useEffect(() => {
@@ -39,7 +57,13 @@ const TestPage: NextPage = () => {
     if (wrapper) {
       wrapper.scrollTop = 0;
     }
-  }, scores);
+  }, [scores]);
+
+  useEffect(() => {
+    if (questionIndex == questions.length) {
+      getResults();
+    }
+  }, [questionIndex])
 
   const updateStatistics = async (typeNumber: number) => {
     await fetch(`/api/statistics`, {
@@ -58,28 +82,7 @@ const TestPage: NextPage = () => {
 
   const handleClickAnswer = async (answer: number, typeScores: number[]) => {
     updateQuestion(typeScores, Direction.NEXT);
-
-    if (questionIndex < questions.length - 1) {
-      setAnswers([...answers, answer]);
-    } else {
-      setLoading(true);
-
-      let typeNumber = scores.indexOf(Math.max(...scores)) + 1;
-
-      if (typeNumber > 0) {
-        await updateStatistics(typeNumber);
-        await new Promise((r) => setTimeout(r, 500));
-      }
-
-      // t: 직접 테스트함을 표시
-      router.push({
-        pathname: "/result",
-        query: {
-          type: ResultConverter.encode(typeNumber),
-          t: 1
-        },
-      });
-    }
+    setAnswers([...answers, answer]);
   };
 
   const handleClickBack = () => {
@@ -97,7 +100,7 @@ const TestPage: NextPage = () => {
     }
   };
 
-  if (loading) {
+  if (questionIndex == questions.length) {
     return (
       <Layout>
         <TestLoading />
